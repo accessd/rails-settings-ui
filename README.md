@@ -14,20 +14,19 @@ Add to Gemfile
 Routing
 -------
 
-  # engine root:
-  rails_settings_ui_path
-
+    # engine root:
+    rails_settings_ui_path
+  
 Views
 -------------
 
-  # # Use admin layout:
-  # RailsSettingsUi::ApplicationController.layout 'admin'
-  # # If you are using a custom layout, you will want to make app routes available to RailsSettingsUi:
-  # Rails.application.config.to_prepare { RailsSettingsUi.inline_main_app_routes! }
+    # Use admin layout:
+    RailsSettingsUi::ApplicationController.layout 'admin'
+    # If you are using a custom layout, you will want to make app routes available to RailsSettingsUi:
+    Rails.application.config.to_prepare { RailsSettingsUi.inline_main_app_routes! }
 
 
-Authentication & authorization
-------------------------------
+
 
 
 
