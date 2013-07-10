@@ -1,0 +1,26 @@
+%ul.breadcrumb
+  %li.active
+    Settings
+
+- if @casted_settings && @casted_settings[:errors].any?
+  .alert.alert-error Settings include errors
+
+= form_tag [:update_all], method: :put, class: 'form-inline' do
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Description
+        %th Value
+    %tbody
+      - @settings.each do |name, value|
+        - if name != :errors
+          %tr
+            %td= I18n.t("admin.settings.#{name}", default: name)
+            %td
+              - setting_with_error = @casted_settings && @casted_settings[:errors].include?(name)
+              %div{class: "control-group #{ setting_with_error ? 'error' : ''}"}
+                = setting_field(name, value)
+                - if setting_with_error
+                  %span.help-inline= @casted_settings[:errors][name]
+
+  = submit_tag "Save all", class: 'btn btn-info'

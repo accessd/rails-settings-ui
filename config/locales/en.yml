@@ -1,0 +1,5 @@
+en:
+  admin:
+    settings:
+      errors: 
+        invalid_numeric: 'Invalid numeric'
