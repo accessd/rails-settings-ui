@@ -15,7 +15,7 @@
       - @settings.each do |name, value|
         - if name != :errors
           %tr
-            %td= I18n.t("admin.settings.#{name}", default: name)
+            %td= I18n.t("settings.attributes.#{name}.name")
             %td
               - setting_with_error = @casted_settings && @casted_settings[:errors].include?(name)
               %div{class: "control-group #{ setting_with_error ? 'error' : ''}"}

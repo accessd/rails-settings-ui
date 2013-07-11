@@ -13,14 +13,48 @@ Add to Gemfile
 
 
     # adds initializer and route:
-	rails g rails_settings_ui:install
+    rails g rails_settings_ui:install
 
 Routing
 -------
 
     # engine root:
     rails_settings_ui_path
-  
+
+I18n
+-------------
+
+You can localize:
+
+*  Settings names, eg:
+
+```yaml
+  settings:
+    attributes:
+      launch_mode: # setting name
+        name: 'Launch mode'
+```
+
+*  Checkbox labels for array options, eg:
+
+```yaml
+  settings:
+    attributes:
+      launch_mode:
+        checkboxes:
+          auto: 'Auto mode'
+          manual: 'Manual mode'
+```
+
+*  Help blocks for settings, eg:
+
+```yaml
+  settings:
+    attributes:
+      launch_mode: <- setting name
+        help_block: 'Rocket launch mode'
+```
+
 Views
 -------------
 

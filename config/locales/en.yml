@@ -1,5 +1,5 @@
 en:
-  admin:
-    settings:
-      errors: 
-        invalid_numeric: 'Invalid numeric'
+  settings:
+    errors:
+      invalid_numeric: 'Invalid numeric'
+      invalid_hash: 'Invalid hash'

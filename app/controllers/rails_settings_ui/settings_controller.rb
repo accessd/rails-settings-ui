@@ -10,7 +10,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
       render :index
     else
       @casted_settings.map { |setting| Settings[setting[0]] = setting[1] if setting[0] != "errors" }
-      redirect_to [:admin, :settings]
+      redirect_to [:settings]
     end
   end
 
@@ -21,6 +21,6 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   end
 
   def cast_settings_params
-    @casted_settings = Settings.cast(params["settings"])
+    @casted_settings = RailsSettingsUi::SettingsHelper.cast(params["settings"])
   end
 end
