@@ -11,6 +11,10 @@ Add to Gemfile
 
     gem 'rails-settings-ui'
 
+
+    # adds initializer and route:
+	rails g rails_settings_ui:install
+
 Routing
 -------
 
