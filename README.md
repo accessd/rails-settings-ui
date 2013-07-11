@@ -2,7 +2,7 @@ Rails settings UI
 ================================
 
 A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 3.
-It compatible with [rails-settings-cached gem](https://github.com/huacnlee/rails-settings-cached).
+It compatible with [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
 
 How to
 -----
@@ -11,6 +11,7 @@ Add to Gemfile
 
     gem 'rails-settings-ui'
 
+Setup:
 
     # adds initializer and route:
     rails g rails_settings_ui:install
@@ -19,7 +20,7 @@ Routing
 -------
 
     # engine root:
-    rails_settings_ui_path
+    rails_settings_ui_url
 
 I18n
 -------------
@@ -51,7 +52,7 @@ You can localize:
 ```yaml
   settings:
     attributes:
-      launch_mode: <- setting name
+      launch_mode:
         help_block: 'Rocket launch mode'
 ```
 
@@ -75,7 +76,7 @@ Note that this must be placed before any other references to rails-setting-ui ap
 Alternatively, to have custom rules just for rails-setting-ui you can:
 
     Rails.application.config.to_prepare do
-      RailsEmailPreview::ApplicationController.module_eval do
+      RailsSettingsUi::ApplicationController.module_eval do
         before_filter :check_settings_permissions
       
         private
