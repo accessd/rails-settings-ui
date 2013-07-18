@@ -2,7 +2,7 @@
   %li.active= t('settings.index.title')
 
 - if @casted_settings && @casted_settings[:errors].any?
-  .alert.alert-error Settings include errors
+  .alert.alert-error= t('settings.index.settings_include_errors')
 
 = form_tag [:update_all], method: :put, class: 'form-inline' do
   %table.table.table-striped

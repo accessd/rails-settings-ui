@@ -5,6 +5,7 @@ ru:
       description: Описание
       value: Значение
       save_all: Сохранить
+      settings_include_errors: Ошибка в настройках
     errors:
       invalid_numeric: Невалидный формат числа
       invalid_hash: Невалидный хэш

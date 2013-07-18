@@ -5,6 +5,7 @@ en:
       description: Description
       value: Value
       save_all: Save all
+      settings_include_errors: Settings include errors
     errors:
       invalid_numeric: Invalid numeric
       invalid_hash: Invalid hash
