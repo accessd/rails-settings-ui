@@ -56,13 +56,29 @@ You can localize:
         help_block: 'Rocket launch mode'
 ```
 
-Views
+Validations
 -------------
 
-    # Use admin layout:
-    RailsSettingsUi::ApplicationController.layout 'admin'
-    # If you are using a custom layout, you will want to make app routes available to rails-setting-ui:
-    Rails.application.config.to_prepare { RailsSettingsUi.inline_main_app_routes! }
+To validation work is required the default settings in the proper format, eg:
+
+    class Settings < RailsSettings::CachedSettings
+      defaults[:company_name] = "Company name"
+      defaults[:head_name] = "Head name"
+      defaults[:manager_premium] = 19
+      defaults[:show_contract_fields] = true
+      defaults[:launch_mode] = [:auto, :manual]
+    end
+
+Views
+-------------
+    Rails.application.config.to_prepare do
+      # Use admin layout:
+      RailsSettingsUi::ApplicationController.module_eval do
+        layout 'admin'
+      end
+      # If you are using a custom layout, you will want to make app routes available to rails-setting-ui:
+      RailsSettingsUi.inline_main_app_routes!
+    end
 
 
 Authentication & authorization
