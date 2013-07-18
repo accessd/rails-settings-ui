@@ -1,0 +1,10 @@
+ru:
+  settings:
+    index:
+      title: Настройки
+      description: Описание
+      value: Значение
+      save_all: Сохранить
+    errors:
+      invalid_numeric: Невалидный формат числа
+      invalid_hash: Невалидный хэш

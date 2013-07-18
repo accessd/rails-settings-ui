@@ -1,5 +1,10 @@
 en:
   settings:
+    index:
+      title: Settings
+      description: Description
+      value: Value
+      save_all: Save all
     errors:
-      invalid_numeric: 'Invalid numeric'
-      invalid_hash: 'Invalid hash'
+      invalid_numeric: Invalid numeric
+      invalid_hash: Invalid hash
