@@ -6,9 +6,12 @@ require 'rails-settings-ui/version'
 require 'rails-settings-cached'
 
 module RailsSettingsUi
-
   mattr_accessor :parent_controller
   self.parent_controller = '::ApplicationController'
+
+  # Settings not displayed in the interface (eg. [:launch_mode, :project_name])
+  mattr_accessor :ignored_settings
+  self.ignored_settings = []
 
   class << self
     def inline_main_app_routes!

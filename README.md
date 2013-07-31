@@ -16,6 +16,15 @@ Setup:
     # adds initializer and route:
     rails g rails_settings_ui:install
 
+Config
+------------
+
+In config/initializers/rails_settings_ui.rb
+
+    RailsSettingsUi.setup do |config|
+      config.ignored_settings = [:company_name] # Settings not displayed in the interface
+    end
+
 Routing
 -------
 
