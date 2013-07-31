@@ -1,6 +1,6 @@
 class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationController
-	before_filter :collection
-	before_filter :cast_settings_params, only: :update_all
+  before_filter :collection
+  before_filter :cast_settings_params, only: :update_all
 
   def index
   end
@@ -17,7 +17,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-  	@settings = Hash[Settings.defaults.merge(Settings.all)]
+    @settings = Hash[Settings.defaults.merge(Settings.all)]
   end
 
   def cast_settings_params
