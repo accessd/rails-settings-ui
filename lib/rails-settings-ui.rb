@@ -13,6 +13,10 @@ module RailsSettingsUi
   mattr_accessor :ignored_settings
   self.ignored_settings = []
 
+  # Settings displayed in the interface as select tag instead checkboxes (useful for array with one possible choice)
+  mattr_accessor :settings_displayed_as_select_tag
+  self.settings_displayed_as_select_tag = []
+
   class << self
     def inline_main_app_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator

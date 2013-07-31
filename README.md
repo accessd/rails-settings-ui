@@ -45,13 +45,13 @@ You can localize:
         name: 'Launch mode'
 ```
 
-*  Checkbox labels for array options, eg:
+*  Checkbox or select options labels for array options, eg:
 
 ```yaml
   settings:
     attributes:
       launch_mode:
-        checkboxes:
+        labels:
           auto: 'Auto mode'
           manual: 'Manual mode'
 ```
