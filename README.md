@@ -5,7 +5,8 @@ A Rails Engine to manage your application settings. Includes validation. Compati
 It compatible with [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
 
 Preview:
-![screenshot][settings-page-screenshot]
+
+![ScreenShot](https://raw.github.com/accessd/rails-settings-ui/master/doc/img/settings-page.png)
 
 How to
 -----
