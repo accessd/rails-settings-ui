@@ -4,6 +4,9 @@ Rails settings UI
 A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 3.
 It compatible with [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
 
+Preview:
+![screenshot][settings-page-screenshot]
+
 How to
 -----
 
