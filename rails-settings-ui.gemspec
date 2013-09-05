@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency "i18n"
   s.add_dependency "haml-rails"
   s.add_dependency "twitter-bootstrap-rails"
-  s.add_dependency "rails-settings-cached", "=0.2.4"
+  s.add_dependency "rails-settings-cached", "=0.3.1"
 
   s.version = RailsSettingsUi::VERSION
 end
