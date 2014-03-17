@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
 
-  s.add_dependency "rails", "~> 3.1"
+  s.add_dependency "rails", ">= 3.0"
   s.add_dependency "i18n"
   s.add_dependency "haml-rails"
   s.add_dependency "twitter-bootstrap-rails"
