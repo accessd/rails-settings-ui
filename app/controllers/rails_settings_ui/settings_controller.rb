@@ -17,7 +17,6 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    I18n.locale = :en
     all_settings = Settings.defaults.merge(Settings.all)
     all_settings_without_ignored = all_settings.reject{ |name, description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
     @settings = Hash[all_settings_without_ignored]
