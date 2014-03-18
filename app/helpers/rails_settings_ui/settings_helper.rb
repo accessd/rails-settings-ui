@@ -42,7 +42,7 @@ module RailsSettingsUi::SettingsHelper
     requires_cast
   end
 
-  def setting_field(setting_name, setting_value)
+  def setting_field(setting_name, setting_value, all_settings)
     if RailsSettingsUi.settings_displayed_as_select_tag.include?(setting_name.to_sym)
       default_setting_values = Settings.defaults[setting_name.to_s].map do |setting_value|
         [I18n.t("settings.attributes.#{setting_name}.labels.#{setting_value}", default: setting_value.to_s), setting_value]
@@ -51,7 +51,7 @@ module RailsSettingsUi::SettingsHelper
     elsif setting_value.is_a?(Array)
       field = ""
       Settings.defaults[setting_name.to_sym].each do |value|
-        field << check_box_tag("settings[#{setting_name.to_s}][#{value.to_s}]", nil, Settings.defaults.merge(Settings.all)[setting_name.to_s].include?(value), style: "margin: 0 10px;")
+        field << check_box_tag("settings[#{setting_name.to_s}][#{value.to_s}]", nil, all_settings[setting_name.to_s].include?(value), style: "margin: 0 10px;")
         field << label_tag("settings[#{setting_name.to_s}][#{value.to_s}]", I18n.t("settings.attributes.#{setting_name}.labels.#{value}", default: value.to_s), style: "display: inline-block;")
       end
       return field.html_safe

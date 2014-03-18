@@ -18,7 +18,7 @@
             %td
               - setting_with_error = @casted_settings && @casted_settings[:errors].include?(name)
               %div{class: "control-group #{ setting_with_error ? 'error' : ''}"}
-                = setting_field(name, value)
+                = setting_field(name, value, @settings)
                 - if setting_with_error
                   %span.help-inline= @casted_settings[:errors][name]
 
