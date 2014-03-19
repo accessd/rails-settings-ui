@@ -55,7 +55,7 @@ You can localize:
         name: 'Launch mode'
 ```
 
-*  Checkbox or select options labels for array options, eg:
+*  Checkbox options labels for array options, eg:
 
 ```yaml
   settings:
@@ -64,6 +64,17 @@ You can localize:
         labels:
           auto: 'Auto mode'
           manual: 'Manual mode'
+```
+
+*  Select options labels and values(it's required for selects), eg:
+
+```yaml
+  settings:
+    attributes:
+      buy_mode:
+        labels:
+          auto: 'Auto buy' # 'auto' is option value, 'Auto buy' is option label
+          manual: 'Manual buy'
 ```
 
 *  Help blocks for settings, eg:

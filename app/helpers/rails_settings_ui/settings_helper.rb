@@ -44,8 +44,8 @@ module RailsSettingsUi::SettingsHelper
 
   def setting_field(setting_name, setting_value, all_settings)
     if RailsSettingsUi.settings_displayed_as_select_tag.include?(setting_name.to_sym)
-      default_setting_values = Settings.defaults[setting_name.to_s].map do |setting_value|
-        [I18n.t("settings.attributes.#{setting_name}.labels.#{setting_value}", default: setting_value.to_s), setting_value]
+      default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |label, value|
+        [label, value]
       end
       select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value))
     elsif setting_value.is_a?(Array)
