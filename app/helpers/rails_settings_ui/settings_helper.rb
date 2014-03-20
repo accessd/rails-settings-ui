@@ -1,8 +1,21 @@
 module RailsSettingsUi::SettingsHelper
+  TIME_PERIODS = ["second", "minute", "hour", "day", "week", "month"]
+  POSSIBLE_TIME_PERIODS = TIME_PERIODS.map{ |period| "(#{period}s?)" }.join('|')
+  TIME_PERIOD_REGEXP = /\A(\d+) (#{POSSIBLE_TIME_PERIODS})\z/
+
   def self.cast(requires_cast)
     requires_cast[:errors] = {}
+    # join date periods
+    requires_cast.each do |name, value|
+      if value.is_a?(Hash) && value.has_key?('1i') && value.has_key?('2i')
+        requires_cast[name] = "#{value['1i']}.#{value['2i']}"
+      end
+    end
+
     requires_cast.each do |var_name, value|
       case Settings.defaults[var_name.to_sym]
+        when TIME_PERIOD_REGEXP
+          requires_cast[var_name] = value
         when Fixnum
           if is_numeric?(value)
             requires_cast[var_name] = value.to_i
@@ -57,6 +70,8 @@ module RailsSettingsUi::SettingsHelper
       return field.html_safe
     elsif [TrueClass, FalseClass].include?(setting_value.class)
       return check_box_tag("settings[#{setting_name.to_s}]", nil, setting_value).html_safe
+    elsif time_period = setting_value.inspect.match(TIME_PERIOD_REGEXP)
+      return text_field_tag("settings[#{setting_name}][1i]", time_period[1]) + select_tag("settings[#{setting_name}][2i]", options_for_select(TIME_PERIODS.map{|period| ["#{period}s", "#{period}s"]}, time_period[2]))
     else
       text_field = if setting_value.to_s.size > 30
         text_area_tag("settings[#{setting_name}]", setting_value.to_s, rows: 10)
