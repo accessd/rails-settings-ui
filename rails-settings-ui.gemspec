@@ -18,6 +18,11 @@ Gem::Specification.new do |s|
   s.add_dependency "i18n"
   s.add_dependency "haml-rails"
   s.add_dependency "twitter-bootstrap-rails"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "bundler"
+  s.add_development_dependency "factory_girl_rails"
+  s.test_files = Dir["spec/**/*"]
 
   s.version = RailsSettingsUi::VERSION
 end
