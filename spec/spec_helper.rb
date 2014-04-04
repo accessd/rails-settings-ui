@@ -7,6 +7,8 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
 
+load "#{Rails.root.to_s}/db/schema.rb" # set up memory db
+
 Rails.backtrace_cleaner.remove_silencers!
 
 # Load support files
