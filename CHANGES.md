@@ -1,3 +1,7 @@
+## v0.1.0
+
+* total refactoring settings helper
+
 ## v0.0.2
 
 * select options labels and values from locale
