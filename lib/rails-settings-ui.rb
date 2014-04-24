@@ -3,6 +3,8 @@ require 'rails-settings-ui/engine'
 require 'rails-settings-ui/main_app_route_delegator'
 require 'rails-settings-ui/version'
 
+require "rails-settings-ui/type_converter"
+
 module RailsSettingsUi
   mattr_accessor :parent_controller
   self.parent_controller = '::ApplicationController'

@@ -23,6 +23,6 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   end
 
   def cast_settings_params
-    @casted_settings = RailsSettingsUi::SettingsHelper.cast(params["settings"])
+    @casted_settings = RailsSettingsUi::TypeConverter.cast(params["settings"])
   end
 end
