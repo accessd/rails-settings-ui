@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml-rails'
   s.add_dependency 'sass-rails', '>= 3.2'
   s.add_dependency 'bootstrap-sass', '>= 3.1.1'
-  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-rails', '>= 3.0.1'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'factory_girl_rails'
