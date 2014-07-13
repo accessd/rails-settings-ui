@@ -16,7 +16,7 @@ describe RailsSettingsUi::TypeConverter do
       it "should to set false" do
         Settings.defaults[:check_something] = true
         settings = RailsSettingsUi::TypeConverter.cast({})
-        expect(settings[:check_something]).to be_false
+        expect(settings[:check_something]).to be_falsey
       end
     end
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Settings interface" do
+describe "Settings interface", :type => :feature do
   after do
     RailsSettingsUi.settings_displayed_as_select_tag = []
     RailsSettingsUi.ignored_settings = []
@@ -14,25 +14,25 @@ describe "Settings interface" do
 
     it "long text" do
       visit "/settings"
-      page.should have_selector('textarea#settings_description')
+      expect(page).to have_selector('textarea#settings_description')
     end
 
     it "boolean" do
       visit "/settings"
-      page.should have_selector('input#settings_check_something[type=checkbox]')
+      expect(page).to have_selector('input#settings_check_something[type=checkbox]')
     end
 
     describe "array" do
       it "should display as checkboxes group by default" do
         visit "/settings"
-        page.should have_selector('input#settings_mode_manual[type=checkbox]')
-        page.should have_selector('input#settings_mode_auto[type=checkbox]')
+        expect(page).to have_selector('input#settings_mode_manual[type=checkbox]')
+        expect(page).to have_selector('input#settings_mode_auto[type=checkbox]')
       end
 
       it "should display as select if setting defined in RailsSettingsUi.settings_displayed_as_select_tag" do
         RailsSettingsUi.settings_displayed_as_select_tag = [:mode]
         visit "/settings"
-        page.should have_selector('select#settings_mode')
+        expect(page).to have_selector('select#settings_mode')
       end
     end    
   end

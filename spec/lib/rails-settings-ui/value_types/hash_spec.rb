@@ -20,7 +20,7 @@ describe RailsSettingsUi::ValueTypes::Hash do
   describe "if value not valid hash" do
     it "should be not valid" do
       fixnum_type = RailsSettingsUi::ValueTypes::Hash.new("{\"border_color\"=>, \"block_color\"=>\"ffffff\"")
-      expect(fixnum_type.valid?).to be_false
+      expect(fixnum_type.valid?).to be_falsey
     end
   end
 end

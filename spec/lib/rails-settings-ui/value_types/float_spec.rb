@@ -11,7 +11,7 @@ describe RailsSettingsUi::ValueTypes::Float do
   describe "if value not numeric" do
     it "should be not valid" do
       fixnum_type = RailsSettingsUi::ValueTypes::Float.new("qwerty")
-      expect(fixnum_type.valid?).to be_false
+      expect(fixnum_type.valid?).to be_falsey
     end
   end
 end
