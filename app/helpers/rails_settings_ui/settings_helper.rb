@@ -1,6 +1,8 @@
 module RailsSettingsUi::SettingsHelper
   def setting_field(setting_name, setting_value, all_settings)
-    if RailsSettingsUi.settings_displayed_as_select_tag.include?(setting_name.to_sym)
+    if !Settings.defaults.has_key?(setting_name.to_sym)
+      message_for_default_value_missing
+    elsif RailsSettingsUi.settings_displayed_as_select_tag.include?(setting_name.to_sym)
       select_tag_field(setting_name, setting_value)
     elsif setting_value.is_a?(Array)
       checkboxes_group_field(setting_name, all_settings)
@@ -40,5 +42,9 @@ module RailsSettingsUi::SettingsHelper
 
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     field + (help_block_content.presence && content_tag(:span, help_block_content, class: 'help-block'))
+  end
+
+  def message_for_default_value_missing
+    content_tag(:span, I18n.t("settings.errors.default_missing"), class: "label label-important")
   end
 end

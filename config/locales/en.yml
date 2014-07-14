@@ -9,3 +9,4 @@ en:
     errors:
       invalid_numeric: Invalid numeric
       invalid_hash: Invalid hash
+      default_missing: Default value missing, but exists in db

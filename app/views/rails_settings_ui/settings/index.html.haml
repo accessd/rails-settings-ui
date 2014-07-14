@@ -13,9 +13,9 @@
     %tbody
       - @settings.each do |name, value|
         - if name != :errors
-          %tr
+          %tr{data: {name: name}}
             %td= I18n.t("settings.attributes.#{name}.name")
-            %td
+            %td.setting-value
               - setting_with_error = @casted_settings && @casted_settings[:errors].include?(name)
               %div{class: "control-group #{ setting_with_error ? 'error' : ''}"}
                 = setting_field(name, value, @settings)

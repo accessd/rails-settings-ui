@@ -9,3 +9,4 @@ ru:
     errors:
       invalid_numeric: Невалидный формат числа
       invalid_hash: Невалидный хэш
+      default_missing: Значение по умолчанию отсутствует, но содержится в базе

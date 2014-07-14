@@ -60,4 +60,26 @@ describe "Settings interface", :type => :feature do
       expect(page).to have_content("Invalid hash")
     end
   end
+
+  describe "settings missing in defaults, but present in db" do
+    it "should show info message" do
+      create_settings_in_db_which_missing_in_defaults
+      visit "/settings"
+      expect_setting_row_to_have_default_missing_message("company")
+    end
+  end
+
+  def create_settings_in_db_which_missing_in_defaults
+    Settings.create!(var: "company", value: "apple")
+  end
+
+  def setting_tr_element_for_name(setting_name)
+    find("tr[data-name='#{setting_name}']")
+  end
+
+  def expect_setting_row_to_have_default_missing_message(setting_name)
+    within tr = setting_tr_element_for_name(setting_name) do
+      expect(tr.find(".setting-value")).to have_content(I18n.t("settings.errors.default_missing"))
+    end
+  end
 end
