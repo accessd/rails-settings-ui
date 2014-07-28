@@ -37,7 +37,7 @@ module RailsSettingsUi
     end
 
     def self.setting_value_type(name, value)
-      default_setting_value_type = Settings.defaults[name.to_sym].class
+      default_setting_value_type = RailsSettingsUi.settings_klass.defaults[name.to_sym].class
       unless VALUE_TYPES_MAP.keys.include?(default_setting_value_type)
         raise RailsSettingsUi::UnknownDefaultValueType, "Unknown default value type #{default_setting_value_type}"
       end
@@ -47,7 +47,7 @@ module RailsSettingsUi
     end
 
     def self.set_non_presented_boolean_settings_to_false(settings)
-      Settings.defaults.each do |name, value|
+      RailsSettingsUi.settings_klass.defaults.each do |name, value|
         if !settings[name.to_sym].present? && [TrueClass, FalseClass].include?(value.class)
           settings[name.to_sym] = false
         end
