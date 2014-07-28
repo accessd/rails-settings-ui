@@ -17,6 +17,9 @@ module RailsSettingsUi
   mattr_accessor :settings_displayed_as_select_tag
   self.settings_displayed_as_select_tag = []
 
+  mattr_accessor :settings_class
+  self.settings_class = "Settings"
+
   class << self
     def inline_main_app_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator
@@ -24,6 +27,10 @@ module RailsSettingsUi
 
     def setup
       yield self
+    end
+
+    def settings_klass
+      settings_class.constantize
     end
   end
 end

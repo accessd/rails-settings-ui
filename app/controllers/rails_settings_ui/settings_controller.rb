@@ -9,7 +9,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
     if @casted_settings[:errors].any?
       render :index
     else
-      @casted_settings.map { |setting| Settings[setting[0]] = setting[1] if setting[0] != "errors" }
+      @casted_settings.map { |setting| RailsSettingsUi.settings_klass[setting[0]] = setting[1] if setting[0] != "errors" }
       redirect_to [:settings]
     end
   end
@@ -17,7 +17,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    all_settings = Settings.defaults.merge(Settings.get_all)
+    all_settings = RailsSettingsUi.settings_klass.defaults.merge(RailsSettingsUi.settings_klass.get_all)
     all_settings_without_ignored = all_settings.reject{ |name, description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
     @settings = Hash[all_settings_without_ignored]
   end
