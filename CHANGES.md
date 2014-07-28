@@ -1,3 +1,8 @@
+## v0.2.0
+
+* Case with nil value settings
+* Option to customize settings class name
+
 ## v0.1.1
 
 * remove less
