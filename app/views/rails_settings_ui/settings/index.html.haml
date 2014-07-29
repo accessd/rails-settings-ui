@@ -1,10 +1,10 @@
-%ul.breadcrumb
+%ol.breadcrumb
   %li.active= t('settings.index.title')
 
 - if @casted_settings && @casted_settings[:errors].any?
-  .alert.alert-error= t('settings.index.settings_include_errors')
+  .alert.alert-danger= t('settings.index.settings_include_errors')
 
-= form_tag [:update_all], method: :put, class: 'form-inline' do
+= form_tag [:update_all], method: :put, class: 'form' do
   %table.table.table-striped
     %thead
       %tr
@@ -17,9 +17,9 @@
             %td= I18n.t("settings.attributes.#{name}.name")
             %td.setting-value
               - setting_with_error = @casted_settings && @casted_settings[:errors].include?(name)
-              %div{class: "control-group #{ setting_with_error ? 'error' : ''}"}
+              %div{class: "form-group #{ setting_with_error ? 'has-error' : ''}"}
                 = setting_field(name, value, @settings)
                 - if setting_with_error
-                  %span.help-inline= @casted_settings[:errors][name]
+                  %span.help-block= @casted_settings[:errors][name]
 
-  = submit_tag t('settings.index.save_all'), class: 'btn btn-info'
+  = submit_tag t('settings.index.save_all'), class: 'btn btn-primary btn-lg'

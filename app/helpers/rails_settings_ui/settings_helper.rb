@@ -9,7 +9,7 @@ module RailsSettingsUi::SettingsHelper
     elsif [TrueClass, FalseClass].include?(setting_value.class)
       checkbox_field(setting_name, setting_value)
     else
-      text_field(setting_name, setting_value)
+      text_field(setting_name, setting_value, class: 'form-control')
     end
   end
 
@@ -17,7 +17,7 @@ module RailsSettingsUi::SettingsHelper
     default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |label, value|
       [label, value]
     end
-    select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value))
+    select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
   end
 
   def checkboxes_group_field(setting_name, all_settings)
@@ -33,11 +33,11 @@ module RailsSettingsUi::SettingsHelper
     check_box_tag("settings[#{setting_name.to_s}]", nil, setting_value).html_safe
   end
 
-  def text_field(setting_name, setting_value)
+  def text_field(setting_name, setting_value, options = {})
     field = if setting_value.to_s.size > 30
-      text_area_tag("settings[#{setting_name}]", setting_value.to_s, rows: 10)
+      text_area_tag("settings[#{setting_name}]", setting_value.to_s, options.merge(rows: 10))
     else
-      text_field_tag("settings[#{setting_name}]", setting_value.to_s)
+      text_field_tag("settings[#{setting_name}]", setting_value.to_s, options)
     end
 
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
@@ -45,6 +45,6 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def message_for_default_value_missing
-    content_tag(:span, I18n.t("settings.errors.default_missing"), class: "label label-important")
+    content_tag(:span, I18n.t("settings.errors.default_missing"), class: "label label-warning")
   end
 end
