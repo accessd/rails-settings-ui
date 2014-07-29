@@ -11,6 +11,8 @@ Preview:
 
 ![ScreenShot](https://raw.github.com/accessd/rails-settings-ui/master/doc/img/settings-page.png)
 
+Live example: http://rails-settings-ui.herokuapp.com/
+
 How to
 -----
 
