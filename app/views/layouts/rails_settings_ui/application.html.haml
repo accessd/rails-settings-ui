@@ -8,11 +8,10 @@
     = stylesheet_link_tag "rails_settings_ui/application"
     = csrf_meta_tags
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
+    .container
+      .navbar.navbar-default
         .container-fluid
-          %a.brand{href: "/"} Rails settings ui
-    .container-fluid
-      .row-fluid
-        .content= yield
+          .navbar-header
+            %a.navbar-brand{href: "/"} Rails settings ui
+      .row= yield
       %footer

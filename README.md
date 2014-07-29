@@ -16,11 +16,23 @@ How to
 
 Add to Gemfile
 
-    gem 'rails-settings-ui'
+if you use bootstrap 2
+
+    gem 'rails-settings-ui', '~> 0.2.0'
+
+for bootstrap 3
+
+    gem 'rails-settings-ui', '~> 0.3.0'
+
+then add
+
     gem 'rails-settings-cached'
-    # or
+
+or
+
     gem 'rails-settings'
-    # or your fork of rails-settings
+
+or your fork of rails-settings.
 
 Setup:
 
@@ -103,6 +115,9 @@ To validation work is required the default settings in the proper format, eg:
 
 Views
 -------------
+
+You can render all rails-settings-ui views inside your app layout (for nice looking you will need include bootstrap, eg: `@import 'bootstrap';` in your applications.css.scss):
+
     Rails.application.config.to_prepare do
       # Use admin layout:
       RailsSettingsUi::ApplicationController.module_eval do
