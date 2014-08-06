@@ -27,7 +27,7 @@ module RailsSettingsUi
         type = setting_value_type(name, value)
         settings[name] = type.cast
         if type.errors.any?
-          errors[name.to_sym] = type.errors
+          errors[name.to_sym] = type.errors.join(', ')
         end
       end
       settings = set_non_presented_boolean_settings_to_false(settings)
