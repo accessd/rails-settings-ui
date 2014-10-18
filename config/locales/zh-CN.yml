@@ -1,0 +1,12 @@
+zh-CN:
+  settings:
+    index:
+      title: 设置
+      description: 描述
+      value: 值
+      save_all: 全部保存
+      settings_include_errors: 设置含有错误
+    errors:
+      invalid_numeric: 无效的数字
+      invalid_hash: 无效的 hash
+      default_missing: 数据库中包含此项，但没找到默认值設定
