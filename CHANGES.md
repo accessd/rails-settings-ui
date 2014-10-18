@@ -1,3 +1,12 @@
+## v0.3.1
+
+* fix validation messages
+* relax saas-rails dependency
+
+## v0.3.0
+
+* bootstrap 3.0 support
+
 ## v0.2.0
 
 * Case with nil value settings
