@@ -146,12 +146,15 @@ Alternatively, to have custom rules just for rails-setting-ui you can:
       
         private
         def check_settings_permissions
-           render status: 403 unless current_user && can_manage_settings?(current_user)
+          render status: 403 unless current_user && can_manage_settings?(current_user)
         end
       end
     end 
 
+Issues
+-------------
 
+  * If you wish to use route helpers for your app in parent controllers of `RailsSettingsUi::ApplicationController`, you must call helpers for `main_app`, for example: `main_app.root_path`
 
 
 This project uses MIT-LICENSE.
