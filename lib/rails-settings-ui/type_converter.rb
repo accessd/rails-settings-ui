@@ -6,6 +6,8 @@ require_relative "value_types/float"
 require_relative "value_types/array"
 require_relative "value_types/boolean"
 
+require "setting"
+
 module RailsSettingsUi
   class UnknownDefaultValueType < StandardError;end
 
@@ -21,18 +23,17 @@ module RailsSettingsUi
       TrueClass => RailsSettingsUi::ValueTypes::Boolean
     }
 
-    def self.cast(settings)
-      errors = {}
-      settings.each do |name, value|
+    def self.cast(settings_from_params)
+      casted_settings = []
+      settings_from_params.each do |name, value|
         type = setting_value_type(name, value)
-        settings[name] = type.cast
-        if type.errors.any?
-          errors[name.to_sym] = type.errors.join(', ')
-        end
+        setting = Setting.new(name, type.cast)
+        setting.errors = type.errors
+
+        casted_settings << setting
       end
       settings = set_non_presented_boolean_settings_to_false(settings)
 
-      settings[:errors] = errors
       settings
     end
 
