@@ -15,6 +15,7 @@ module RailsSettingsUi
       Symbol => RailsSettingsUi::ValueTypes::Symbol,
       Fixnum => RailsSettingsUi::ValueTypes::Fixnum,
       ActiveSupport::HashWithIndifferentAccess => RailsSettingsUi::ValueTypes::Hash,
+      ActiveSupport::Duration => RailsSettingsUi::ValueTypes::Float,
       Float => RailsSettingsUi::ValueTypes::Float,
       Array => RailsSettingsUi::ValueTypes::Array,
       FalseClass => RailsSettingsUi::ValueTypes::Boolean,
