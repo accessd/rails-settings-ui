@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'i18n'
   s.add_dependency 'haml-rails'
   s.add_dependency 'sass-rails', '>= 4.0.0'
-  s.add_dependency 'bootstrap-sass', '~> 3.2.0'
+  s.add_dependency 'bootstrap-sass', '>= 3.2.0'
   s.add_development_dependency 'rspec-rails', '>= 3.0.1'
   s.add_development_dependency 'capybara', '~> 2.4.1'
   s.add_development_dependency 'bundler'
