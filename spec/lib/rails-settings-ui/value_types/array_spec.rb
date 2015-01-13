@@ -11,5 +11,11 @@ describe RailsSettingsUi::ValueTypes::Array do
       array_type = RailsSettingsUi::ValueTypes::Array.new("auto")
       expect(array_type.cast).to eq(:auto)
     end
+
+    it "should accept ActionController::Parameters" do
+      parameter = ActionController::Parameters.new('stuff' => 'on', 'other'=> 'off')
+      array_type = RailsSettingsUi::ValueTypes::Array.new parameter
+      expect(array_type.cast).to eq([:stuff])
+    end
   end
 end
