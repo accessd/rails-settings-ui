@@ -1,3 +1,7 @@
+## v0.3.2
+
+* Add support for ActionController::Parameters and ActiveSupport::Duration
+
 ## v0.3.1
 
 * fix validation messages
