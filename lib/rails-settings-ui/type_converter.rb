@@ -2,6 +2,7 @@ require_relative "value_types/string"
 require_relative "value_types/symbol"
 require_relative "value_types/fixnum"
 require_relative "value_types/hash"
+require_relative "value_types/duration"
 require_relative "value_types/float"
 require_relative "value_types/array"
 require_relative "value_types/boolean"
@@ -15,6 +16,7 @@ module RailsSettingsUi
       Symbol => RailsSettingsUi::ValueTypes::Symbol,
       Fixnum => RailsSettingsUi::ValueTypes::Fixnum,
       ActiveSupport::HashWithIndifferentAccess => RailsSettingsUi::ValueTypes::Hash,
+      ActiveSupport::Duration => RailsSettingsUi::ValueTypes::Float,
       Float => RailsSettingsUi::ValueTypes::Float,
       Array => RailsSettingsUi::ValueTypes::Array,
       FalseClass => RailsSettingsUi::ValueTypes::Boolean,
