@@ -31,6 +31,7 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def checkbox_field(setting_name, setting_value)
+    hidden_field_tag("settings[#{setting_name.to_s}]", 'off').html_safe +
     check_box_tag("settings[#{setting_name.to_s}]", nil, setting_value).html_safe
   end
 

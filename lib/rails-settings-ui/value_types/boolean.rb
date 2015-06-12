@@ -4,7 +4,12 @@ module RailsSettingsUi
   module ValueTypes
     class Boolean < RailsSettingsUi::ValueTypes::Base
       def cast
-        self.value = true
+        case value
+        when 'off'
+          self.value = false
+        else
+          self.value = true
+        end
       end
     end
   end
