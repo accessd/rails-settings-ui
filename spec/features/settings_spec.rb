@@ -19,7 +19,10 @@ describe "Settings interface", :type => :feature do
 
     it "boolean" do
       visit "/settings"
+      save_and_open_page
+      expect(page).to have_selector('input#settings_check_something[type=hidden]')
       expect(page).to have_selector('input#settings_check_something[type=checkbox]')
+      expect(page).to have_selector('span.help-block', text: I18n.t("settings.attributes.check_something.help_block"))
     end
 
     describe "array" do
