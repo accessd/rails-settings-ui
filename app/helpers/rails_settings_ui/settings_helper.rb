@@ -27,6 +27,8 @@ module RailsSettingsUi::SettingsHelper
       field << check_box_tag("settings[#{setting_name.to_s}][#{value.to_s}]", nil, checked, style: "margin: 0 10px;")
       field << label_tag("settings[#{setting_name.to_s}][#{value.to_s}]", I18n.t("settings.attributes.#{setting_name}.labels.#{value}", default: value.to_s), style: "display: inline-block;")
     end
+    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
+    field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     field.html_safe
   end
 
