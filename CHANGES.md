@@ -1,3 +1,9 @@
+## v0.4.0
+
+* Fix false boolean values
+* Fix checkboxes group: values can be symbols
+* Add help blocks to checkboxes fields
+
 ## v0.3.2
 
 * Add support for ActionController::Parameters and ActiveSupport::Duration
