@@ -31,8 +31,12 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def checkbox_field(setting_name, setting_value)
-    hidden_field_tag("settings[#{setting_name.to_s}]", 'off').html_safe +
-    check_box_tag("settings[#{setting_name.to_s}]", nil, setting_value).html_safe
+    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
+    fields = ""
+    fields << hidden_field_tag("settings[#{setting_name.to_s}]", 'off').html_safe
+    fields << check_box_tag("settings[#{setting_name.to_s}]", nil, setting_value).html_safe
+    fields << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
+    fields.html_safe
   end
 
   def text_field(setting_name, setting_value, options = {})

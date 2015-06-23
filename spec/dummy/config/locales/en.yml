@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  settings:
+    attributes:
+      check_something:
+        name: Check This Out!
+        help_block: You really should check it out!
