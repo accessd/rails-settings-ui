@@ -1,6 +1,7 @@
 ## v0.5.0
 
 * remove bootstrap_sass dependency
+* setting collection method dependent on Rails version
 
 ## v0.4.0
 

@@ -1,4 +1,5 @@
 class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationController
+  include RailsSettingsUi::SettingsHelper
   before_filter :collection
   before_filter :cast_settings_params, only: :update_all
 
@@ -17,7 +18,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    all_settings = RailsSettingsUi.settings_klass.defaults.merge(RailsSettingsUi.settings_klass.get_all)
+    all_settings = RailsSettingsUi.settings_klass.defaults.merge(RailsSettingsUi.settings_klass.public_send(get_collection_method))
     all_settings_without_ignored = all_settings.reject{ |name, description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
     @settings = Hash[all_settings_without_ignored]
   end

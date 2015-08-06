@@ -55,4 +55,13 @@ module RailsSettingsUi::SettingsHelper
   def message_for_default_value_missing
     content_tag(:span, I18n.t("settings.errors.default_missing"), class: "label label-warning")
   end
+
+  def get_collection_method
+    case Rails::VERSION::STRING
+    when /4\.0\.\d+/ || /3\..*/
+      :all
+    else
+      :get_all
+    end
+  end
 end
