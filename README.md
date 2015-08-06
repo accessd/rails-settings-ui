@@ -18,13 +18,7 @@ How to
 
 Add to Gemfile
 
-if you use bootstrap 2
-
-    gem 'rails-settings-ui', '~> 0.2.0'
-
-for bootstrap 3
-
-    gem 'rails-settings-ui', '~> 0.3.0'
+    gem 'rails-settings-ui'
 
 then add
 
@@ -35,6 +29,9 @@ or
     gem 'rails-settings'
 
 or your fork of rails-settings.
+
+If you want to use bootstrap interface you need also include bootstrap stylesheets to your app.
+You may use [bootstrap-sass](https://github.com/twbs/bootstrap-sass) gem for that.
 
 Setup:
 

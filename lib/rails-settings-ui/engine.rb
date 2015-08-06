@@ -1,7 +1,4 @@
 require 'haml-rails'
-require 'sass'
-require 'sass-rails'
-require 'bootstrap-sass'
 
 module ::RailsSettingsUi
   class Engine < Rails::Engine

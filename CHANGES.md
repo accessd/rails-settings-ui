@@ -1,3 +1,7 @@
+## v0.5.0
+
+* remove bootstrap_sass dependency
+
 ## v0.4.0
 
 * Fix false boolean values
