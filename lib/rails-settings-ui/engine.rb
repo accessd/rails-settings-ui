@@ -1,5 +1,3 @@
-require 'haml-rails'
-
 module ::RailsSettingsUi
   class Engine < Rails::Engine
     isolate_namespace RailsSettingsUi
