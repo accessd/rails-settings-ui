@@ -14,7 +14,7 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def select_tag_field(setting_name, setting_value)
-    default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |label, value|
+    default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |value,label|
       [label, value]
     end
     select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
