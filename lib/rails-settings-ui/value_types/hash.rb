@@ -3,7 +3,7 @@ require_relative "base"
 module RailsSettingsUi
   module ValueTypes
     class Hash < RailsSettingsUi::ValueTypes::Base
-      def cast
+      def self.[](value)
         value
       end
 

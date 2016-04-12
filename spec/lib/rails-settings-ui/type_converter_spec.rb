@@ -24,9 +24,11 @@ describe RailsSettingsUi::TypeConverter do
   describe ".cast" do
     it "should cast settings value by default setting type" do
       Settings.defaults[:project_name] = :foo
-      settings = RailsSettingsUi::TypeConverter.cast({project_name: "bar", limit: "100"})
+      settings = RailsSettingsUi::TypeConverter.cast({project_name: "bar", limit: "100", check_something: 'on'})
+      binding.pry
       expect(settings[:project_name]).to equal(:bar)
       expect(settings[:limit]).to equal(100)
+      expect(settings[:check_something]).to equal(true)
       Settings.defaults[:project_name] = "Dummy"
     end
   end

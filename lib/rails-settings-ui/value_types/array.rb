@@ -3,7 +3,7 @@ require_relative "base"
 module RailsSettingsUi
   module ValueTypes
     class Array < RailsSettingsUi::ValueTypes::Base
-      def cast
+      def self.[](value)
         # Array presented in checkboxes
         if ["Hash", "ActiveSupport::HashWithIndifferentAccess"].include?(value.class.name)
           value.keys.map!(&:to_sym)

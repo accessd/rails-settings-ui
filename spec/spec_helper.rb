@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
+require 'pry'
 
 load "#{Rails.root.to_s}/db/schema.rb" # set up memory db
 

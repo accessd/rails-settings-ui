@@ -6,31 +6,43 @@ require_relative "value_types/duration"
 require_relative "value_types/float"
 require_relative "value_types/array"
 require_relative "value_types/boolean"
+require 'dry-types'
 
 module RailsSettingsUi
+  module Types
+    include Dry::Types.module
+  end
+
   class UnknownDefaultValueType < StandardError;end
 
   class TypeConverter
     VALUE_TYPES_MAP = {
-      String => RailsSettingsUi::ValueTypes::String,
+      String => RailsSettingsUi::Types::Coercible::String,
       Symbol => RailsSettingsUi::ValueTypes::Symbol,
-      Fixnum => RailsSettingsUi::ValueTypes::Fixnum,
+      Fixnum => RailsSettingsUi::Types::Form::Int,
       ActiveSupport::HashWithIndifferentAccess => RailsSettingsUi::ValueTypes::Hash,
-      ActiveSupport::Duration => RailsSettingsUi::ValueTypes::Float,
-      Float => RailsSettingsUi::ValueTypes::Float,
+      ActiveSupport::Duration => RailsSettingsUi::Types::Form::Float,
+      Float => RailsSettingsUi::Types::Form::Float,
       Array => RailsSettingsUi::ValueTypes::Array,
-      FalseClass => RailsSettingsUi::ValueTypes::Boolean,
-      TrueClass => RailsSettingsUi::ValueTypes::Boolean
-    }
+      FalseClass => RailsSettingsUi::Types::Form::Bool,
+      TrueClass => RailsSettingsUi::Types::Form::Bool
+    }.freeze
+
+    def self.schema
+      Dry::Validation.Form do
+        key(:limit) { int? }
+      end
+    end
 
     def self.cast(settings)
       errors = {}
+      errors = schema.call(limit: settings[:limit]).messages
+      binding.pry
       settings.each do |name, value|
-        type = setting_value_type(name, value)
-        settings[name] = type.cast
-        if type.errors.any?
-          errors[name.to_sym] = type.errors.join(', ')
-        end
+        settings[name] = setting_value_type(name, value)
+        # if type.errors.any?
+        #   errors[name.to_sym] = type.errors.join(', ')
+        # end
       end
       settings = set_non_presented_boolean_settings_to_false(settings)
 
@@ -44,8 +56,7 @@ module RailsSettingsUi
         raise RailsSettingsUi::UnknownDefaultValueType, "Unknown default value type #{default_setting_value_type}"
       end
 
-      setting_value_type_class = VALUE_TYPES_MAP[default_setting_value_type]
-      setting_value_type_class.new(value)
+      VALUE_TYPES_MAP[default_setting_value_type][value]
     end
 
     def self.set_non_presented_boolean_settings_to_false(settings)
