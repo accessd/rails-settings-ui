@@ -17,10 +17,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 3.0'
   s.add_dependency 'i18n'
   s.add_dependency 'dry-types'
+  s.add_dependency 'dry-validation'
   s.add_development_dependency 'rspec-rails', '>= 3.0.1'
   s.add_development_dependency 'capybara', '~> 2.4.1'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'launchy'
   s.add_development_dependency 'factory_girl_rails'
   s.test_files = Dir['spec/**/*']
 
