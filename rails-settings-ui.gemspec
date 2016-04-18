@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.summary = 'User interface for manage settings (rails engine)'
   s.description = 'User interface for manage settings with rails-settings gem'
 
-
   s.files = Dir['{app,lib,config}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'Gemfile', 'README.md']
 
   s.add_dependency 'rails', '>= 3.0'

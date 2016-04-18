@@ -40,21 +40,23 @@ module RailsSettingsUi
 
   class SettingsFormCoercible
     attr_reader :settings, :default_settings
+    attr_accessor :coerced_settings
 
     def initialize(default_settings, settings)
       @default_settings = default_settings
       @settings = settings
+      @coerced_settings = {}
     end
 
     def coerce!
-      settings.to_h.symbolize_keys!.each do |name, value|
+      settings.symbolize_keys.each do |name, value|
         default_value_class = default_settings[name].class
         coercible_type = coercions_map[default_value_class]
         raise NotCoercibleError, "can't coerce #{default_value_class}" unless coercible_type
-        settings[name] = coercible_type[value]
+        coerced_settings[name] = coercible_type[value]
       end
-      set_default_boolean_value!(settings)
-      settings
+      set_default_boolean_value!(coerced_settings)
+      coerced_settings
     end
 
     def coercions_map
