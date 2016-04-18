@@ -88,6 +88,7 @@ describe RailsSettingsUi::SettingsFormCoercible do
       it 'is array then should have to set value to empty array' do
         Settings.defaults[:check_something] = [:auto, :manual]
         expect(build_coercion({}).coerce![:mode]).to eq([])
+        Settings.defaults[:check_something] = true
       end
     end
 
