@@ -3,7 +3,8 @@ require 'rails-settings-ui/engine'
 require 'rails-settings-ui/main_app_route_delegator'
 require 'rails-settings-ui/version'
 
-require "rails-settings-ui/type_converter"
+require "rails-settings-ui/settings_form_validator"
+require "rails-settings-ui/settings_form_coercible"
 
 module RailsSettingsUi
   mattr_accessor :parent_controller

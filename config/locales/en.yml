@@ -1,4 +1,8 @@
 en:
+  errors:
+    form_hash?: Invalid hash
+    int?: Invalid numeric
+    float?: Invalid numeric
   settings:
     index:
       title: Settings
@@ -7,6 +11,4 @@ en:
       save_all: Save all
       settings_include_errors: Settings include errors
     errors:
-      invalid_numeric: Invalid numeric
-      invalid_hash: Invalid hash
       default_missing: Default value missing, but exists in db

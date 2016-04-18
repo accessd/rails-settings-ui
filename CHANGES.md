@@ -1,3 +1,7 @@
+## v1.0.0
+
+* total refactoring with dry-rb
+
 ## v0.5.0
 
 * remove bootstrap_sass dependency

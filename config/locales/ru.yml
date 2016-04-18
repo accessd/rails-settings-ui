@@ -1,4 +1,8 @@
 ru:
+  errors:
+    form_hash?: Невалидный хэш
+    int?: Невалидный формат числа
+    float?: Невалидный формат числа
   settings:
     index:
       title: Настройки
