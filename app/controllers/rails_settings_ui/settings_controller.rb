@@ -18,21 +18,20 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    all_settings = default_settings.merge(RailsSettingsUi.settings_klass.public_send(get_collection_method))
     all_settings_without_ignored = all_settings.reject{ |name, description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
     @settings = Hash[all_settings_without_ignored]
     @errors = {}
   end
 
   def validate_settings
-    @errors = RailsSettingsUi::SettingsFormValidator.new(default_settings, params['settings'].deep_dup).errors
+    @errors = RailsSettingsUi::SettingsFormValidator.new(all_settings, params['settings'].deep_dup).errors
   end
 
   def coerced_values
-    RailsSettingsUi::SettingsFormCoercible.new(default_settings, params['settings'].deep_dup).coerce!
+    RailsSettingsUi::SettingsFormCoercible.new(all_settings, params['settings'].deep_dup).coerce!
   end
 
-  def default_settings
-    RailsSettingsUi.settings_klass.defaults
+  def all_settings
+    RailsSettingsUi.settings_klass.get_all
   end
 end
