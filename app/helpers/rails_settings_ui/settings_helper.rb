@@ -42,6 +42,8 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def text_field(setting_name, setting_value, options = {})
+    setting_value = setting_value.permit!.to_h if setting_value.is_a?(ActionController::Parameters)
+
     field = if setting_value.to_s.size > 30
       text_area_tag("settings[#{setting_name}]", setting_value.to_s, options.merge(rows: 10))
     else

@@ -1,7 +1,7 @@
 class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationController
   include RailsSettingsUi::SettingsHelper
-  before_filter :collection
-  before_filter :cast_settings_params, only: :update_all
+  before_action :collection
+  before_action :cast_settings_params, only: :update_all
 
   def index
   end
