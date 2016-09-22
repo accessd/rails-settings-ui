@@ -34,6 +34,7 @@ describe "Settings interface", type: :feature do
         RailsSettingsUi.settings_displayed_as_select_tag = [:mode]
         visit_settings_page
         expect(page).to have_selector('select#settings_mode')
+        expect(page).to have_selector('span.help-block', text: I18n.t("settings.attributes.mode.help_block"))
       end
     end
   end
