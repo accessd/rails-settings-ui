@@ -2,9 +2,6 @@ require 'i18n'
 require 'dry-validation'
 
 module RailsSettingsUi
-  class SettingsSchema < Dry::Validation::Schema::Form
-  end
-
   module CustomPredicates
     include Dry::Logic::Predicates
 
@@ -15,6 +12,10 @@ module RailsSettingsUi
         false
       end
     end
+  end
+
+  class SettingsSchema < Dry::Validation::Schema::Form
+    predicates(CustomPredicates)
   end
 
   class SettingsFormValidator
@@ -32,23 +33,23 @@ module RailsSettingsUi
     end
 
     def errors
-      @schema.call(@settings).messages
+      @schema.call(@settings.to_hash).messages
     end
 
     private
 
     def build_validation_schema
-      v = Dry::Validation::Schema::Value.new
+      registry = Dry::Validation::PredicateRegistry.new(CustomPredicates)
+      v = Dry::Validation::Schema::Value.new(registry: registry)
 
       validatable_settings.each do |name, value|
         predicate = VALIDATABLE_TYPES[value.class]
-        v.key(name.to_sym).required(predicate) if predicate
+        v.required(name.to_sym).filled(predicate) if predicate
       end
 
       SettingsSchema.configure do |config|
         config.rules = v.rules
         config.messages = :i18n
-        config.predicates = CustomPredicates
       end
 
       @schema = SettingsSchema.new

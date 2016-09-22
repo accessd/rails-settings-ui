@@ -1,7 +1,7 @@
 class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationController
   include RailsSettingsUi::SettingsHelper
-  before_filter :collection
-  before_filter :validate_settings, only: :update_all
+  before_action :collection
+  before_action :validate_settings, only: :update_all
 
   def index
   end
@@ -25,11 +25,13 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   end
 
   def validate_settings
-    @errors = RailsSettingsUi::SettingsFormValidator.new(default_settings, params['settings'].deep_dup).errors
+    # validation schema accepts hash (http://dry-rb.org/gems/dry-validation/forms/) so we're converting
+    # ActionController::Parameters => ActiveSupport::HashWithIndifferentAccess
+    @errors = RailsSettingsUi::SettingsFormValidator.new(default_settings, params['settings'].deep_dup.to_unsafe_h).errors
   end
 
   def coerced_values
-    RailsSettingsUi::SettingsFormCoercible.new(default_settings, params['settings'].deep_dup).coerce!
+    RailsSettingsUi::SettingsFormCoercible.new(default_settings, params['settings'].deep_dup.to_unsafe_h).coerce!
   end
 
   def default_settings

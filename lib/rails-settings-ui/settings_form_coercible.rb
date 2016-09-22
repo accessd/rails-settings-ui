@@ -61,7 +61,7 @@ module RailsSettingsUi
     end
 
     def coerce!
-      settings.symbolize_keys.each do |name, value|
+      settings.to_hash.symbolize_keys.each do |name, value|
         default_value_class = default_settings[name].class
         coercible_type = COERCIONS_MAP[default_value_class]
         raise NotCoercibleError, "can't coerce #{default_value_class}" unless coercible_type

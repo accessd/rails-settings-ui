@@ -31,7 +31,6 @@ describe RailsSettingsUi::SettingsFormCoercible do
     context 'ActiveSupport::Duration' do
       it do
         expect(coerce('timer' => '600')).to eq(600)
-        expect(coerce('timer' => '600.5')).to eq(600)
       end
     end
 
@@ -103,7 +102,7 @@ describe RailsSettingsUi::SettingsFormCoercible do
     end
 
     def build_coercion(settings)
-      validator = described_class.new(
+      described_class.new(
         Settings.defaults,
         settings
       )
