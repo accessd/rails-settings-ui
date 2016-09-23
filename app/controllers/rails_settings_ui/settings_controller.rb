@@ -27,11 +27,20 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   def validate_settings
     # validation schema accepts hash (http://dry-rb.org/gems/dry-validation/forms/) so we're converting
     # ActionController::Parameters => ActiveSupport::HashWithIndifferentAccess
-    @errors = RailsSettingsUi::SettingsFormValidator.new(default_settings, params['settings'].deep_dup.to_unsafe_h).errors
+    @errors = RailsSettingsUi::SettingsFormValidator.new(default_settings, settings_from_params).errors
   end
 
   def coerced_values
-    RailsSettingsUi::SettingsFormCoercible.new(default_settings, params['settings'].deep_dup.to_unsafe_h).coerce!
+    RailsSettingsUi::SettingsFormCoercible.new(default_settings, settings_from_params).coerce!
+  end
+
+  def settings_from_params
+    settings_params = params['settings'].deep_dup
+    if settings_params.respond_to?(:to_unsafe_h)
+      settings_params.to_unsafe_h
+    else
+      settings_params
+    end
   end
 
   def default_settings
