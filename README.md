@@ -45,7 +45,8 @@ In config/initializers/rails_settings_ui.rb
 
     RailsSettingsUi.setup do |config|
       config.ignored_settings = [:company_name] # Settings not displayed in the interface
-      config.settings_class = "MySettings" # Customize settings class name
+      config.settings_class = MySettings # Customize settings class name
+      config.current_user_context = true # Apply settings in context of current user
     end
 
 Routing

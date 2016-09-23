@@ -21,6 +21,9 @@ module RailsSettingsUi
   mattr_accessor :settings_class
   self.settings_class = "Settings"
 
+  mattr_accessor :current_user_context
+  self.current_user_context = false
+
   class << self
     def inline_main_app_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator
@@ -28,10 +31,6 @@ module RailsSettingsUi
 
     def setup
       yield self
-    end
-
-    def settings_klass
-      settings_class.constantize
     end
   end
 end

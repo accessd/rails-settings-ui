@@ -10,7 +10,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
     if @errors.any?
       render :index
     else
-      coerced_values.each { |name, value| RailsSettingsUi.settings_klass[name] = value }
+      coerced_values.each { |name, value| settings[name] = value }
       redirect_to [:settings]
     end
   end
@@ -18,7 +18,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    all_settings = default_settings.merge(RailsSettingsUi.settings_klass.public_send(get_collection_method))
+    all_settings = default_settings.merge(settings.public_send(get_collection_method))
     all_settings_without_ignored = all_settings.reject{ |name, description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
     @settings = Hash[all_settings_without_ignored]
     @errors = {}
@@ -43,7 +43,15 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
     end
   end
 
+  def settings
+    if RailsSettingsUi.current_user_context
+      current_user.settings
+    else
+      RailsSettingsUi.settings_class
+    end
+  end
+
   def default_settings
-    RailsSettingsUi.settings_klass.defaults
+    RailsSettingsUi.settings_class.defaults
   end
 end
