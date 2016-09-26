@@ -17,7 +17,10 @@ module RailsSettingsUi::SettingsHelper
     default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |value, label|
       [label, value]
     end
-    select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
+    field = select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
+    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
+    field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
+    field.html_safe
   end
 
   def checkboxes_group_field(setting_name, all_settings)
@@ -64,4 +67,5 @@ module RailsSettingsUi::SettingsHelper
       :get_all
     end
   end
+
 end
