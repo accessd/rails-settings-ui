@@ -31,3 +31,4 @@ en:
         labels:
           auto: 'Auto'
           manual: 'Manual'
+        help_block: This is some help text.
