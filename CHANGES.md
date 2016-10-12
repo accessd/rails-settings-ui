@@ -1,3 +1,12 @@
+## v1.1.5
+
+* show flash success message after saving settings
+
+## v1.1.0
+
+* fix dry-rb and Rails 5 integration
+* add help block support for select tag
+
 ## v1.0.0
 
 * total refactoring with dry-rb
