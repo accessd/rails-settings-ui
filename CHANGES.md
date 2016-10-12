@@ -1,3 +1,7 @@
+## v1.2.0
+
+* enable saving of settings in the context of current user
+
 ## v1.1.0
 
 * fix dry-rb and Rails 5 integration
