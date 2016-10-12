@@ -3,11 +3,15 @@
     <%= t('settings.index.title') %>
   </li>
 </ol>
-<% if @casted_settings && @casted_settings[:errors].any? %>
+<%- if @casted_settings && @casted_settings[:errors].any? %>
   <div class="alert alert-danger">
     <%= t('settings.index.settings_include_errors') %>
   </div>
-<% end %>
+<%- else %>
+  <%- flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <%- end %>
+<%- end %>
 <%= form_tag [:update_all], method: :put, class: 'form' do %>
   <table class="table table-striped">
     <thead>
@@ -21,25 +25,24 @@
       </tr>
     </thead>
     <tbody>
-    <% @settings.each do |name, value| %>
-      <% errors = @errors.has_key?(name.to_sym) ? @errors[name.to_sym].join(', ') : nil %>
+    <%- @settings.each do |name, value| %>
+      <%- errors = @errors.has_key?(name.to_sym) ? @errors[name.to_sym].join(', ') : nil %>
       <tr data-name="<%= name %>">
         <td>
           <%= I18n.t("settings.attributes.#{name}.name") %>
         </td>
         <td class="setting-value">
-          <% setting_with_error = @casted_settings && @casted_settings[:errors].include?(name) %>
           <div class="form-group <%= errors ? 'has-error' : '' %>">
             <%= setting_field(name, value, @settings) %>
             <%- if errors.present? %>
               <span class="help-block"><%= errors %></span>
-            <% end %>
+            <%- end %>
           </div>
         </td>
       </tr>
-    <% end %>
+    <%- end %>
     </tbody>
   </table>
   <%= submit_tag t('settings.index.save_all'), class: 'btn btn-primary btn-lg' %>
-<% end %>
+<%- end %>
 
