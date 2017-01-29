@@ -4,8 +4,8 @@ Rails settings UI
 [![Gem Version](https://badge.fury.io/rb/rails-settings-ui.png)](http://badge.fury.io/rb/rails-settings-ui)
 [![Build Status](https://travis-ci.org/accessd/rails-settings-ui.svg?branch=master)](https://travis-ci.org/accessd/rails-settings-ui)
 
-A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 4.
-It compatible with [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem. Untested, but should work with rails-settings gem.
+A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 5.
+It compatible with [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
 
 Preview:
 
@@ -104,6 +104,8 @@ Validations
 
 To validation work is required the default settings in the proper format, eg:
 
+For rails-settings-cached up to 0.5.8:
+
     class Settings < RailsSettings::CachedSettings
       defaults[:company_name] = "Company name"
       defaults[:head_name] = "Head name"
@@ -111,6 +113,37 @@ To validation work is required the default settings in the proper format, eg:
       defaults[:show_contract_fields] = true
       defaults[:launch_mode] = [:auto, :manual]
     end
+
+For rails-settings-cached with version >= 0.6.0 default settings moved to YAML config file (config/app.yml), so
+defaults should looks like:
+
+```yaml
+  defaults: &defaults
+    rocket_name: "Foo"
+    limit: 123
+    launch_mode:
+      - auto
+      - manual
+    spaceports:
+      - plesetsk
+      - baikonur
+    style:
+      border_color: 'e0e0e0'
+      block_color: 'ffffff'
+      title:
+        font: "Tahoma"
+        size: "12"
+        color: '107821'
+
+  development:
+    <<: *defaults
+
+  test:
+    <<: *defaults
+
+  production:
+    <<: *defaults
+```
 
 Views
 -------------
@@ -140,13 +173,13 @@ Alternatively, to have custom rules just for rails-setting-ui you can:
     Rails.application.config.to_prepare do
       RailsSettingsUi::ApplicationController.module_eval do
         before_filter :check_settings_permissions
-      
+
         private
         def check_settings_permissions
           render status: 403 unless current_user && can_manage_settings?(current_user)
         end
       end
-    end 
+    end
 
 Issues
 -------------

@@ -1,3 +1,7 @@
+## v1.2.0
+
+* support last version of rails-settings-cached (defaults moved to YAML config file)
+
 ## v1.1.0
 
 * fix dry-rb and Rails 5 integration
