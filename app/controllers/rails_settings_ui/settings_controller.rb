@@ -44,6 +44,6 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   end
 
   def default_settings
-    RailsSettingsUi.settings_klass.defaults
+    RailsSettingsUi.default_settings
   end
 end

@@ -33,5 +33,13 @@ module RailsSettingsUi
     def settings_klass
       settings_class.constantize
     end
+
+    def default_settings
+      if Gem.loaded_specs['rails-settings-cached'].version.to_s >= '0.6.0'
+        RailsSettings::Default.instance.with_indifferent_access
+      else
+        RailsSettingsUi.settings_klass.defaults
+      end
+    end
   end
 end
