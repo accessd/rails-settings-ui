@@ -1,4 +1,4 @@
-[WIP] ## v1.2.0
+[WIP] ## v1.x.x
 
 * show flash success message after saving settings
 
