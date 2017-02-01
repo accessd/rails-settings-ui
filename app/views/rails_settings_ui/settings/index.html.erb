@@ -7,6 +7,10 @@
   <div class="alert alert-danger">
     <%= t('settings.index.settings_include_errors') %>
   </div>
+<% else %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
 <% end %>
 <%= form_tag [:update_all], method: :put, class: 'form' do %>
   <table class="table table-striped">

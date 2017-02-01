@@ -132,6 +132,11 @@ describe "Settings interface", type: :feature do
         expect(Settings[:mode]).to eq(:manual)
       end
     end
+
+    it 'shows settings saved message' do
+      click_on_save
+      expect_there_is_success_flash_message(I18n.t('settings.index.settings_saved'))
+    end
   end
 
   begin 'Helper methods'
@@ -163,6 +168,10 @@ describe "Settings interface", type: :feature do
       within tr = setting_tr_element_for_name(setting_name) do
         expect(tr.find(".setting-value")).to have_content(I18n.t("settings.errors.default_missing"))
       end
+    end
+
+    def expect_there_is_success_flash_message(msg)
+      expect(find('.alert-success')).to have_content(msg)
     end
   end
 end

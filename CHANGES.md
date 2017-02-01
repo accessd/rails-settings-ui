@@ -1,3 +1,7 @@
+[WIP] ## v1.2.0
+
+* show flash success message after saving settings
+
 ## v1.2.0
 
 * support last version of rails-settings-cached (defaults moved to YAML config file)

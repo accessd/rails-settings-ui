@@ -11,6 +11,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
       render :index
     else
       coerced_values.each { |name, value| RailsSettingsUi.settings_klass[name] = value }
+      flash[:success] = t('settings.index.settings_saved')
       redirect_to [:settings]
     end
   end
