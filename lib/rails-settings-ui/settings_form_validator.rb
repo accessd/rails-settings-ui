@@ -8,7 +8,7 @@ module RailsSettingsUi
     predicate(:form_hash?) do |value|
       begin
         JSON.parse(value.gsub(/\=\>/, ':'))
-      rescue JSON::ParserError => e
+      rescue JSON::ParserError
         false
       end
     end

@@ -17,7 +17,7 @@ module RailsSettingsUi::SettingsHelper
     default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |value, label|
       [label, value]
     end
-    field = select_tag("settings[#{setting_name.to_s}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
+    field = select_tag("settings[#{setting_name}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     field.html_safe
@@ -27,8 +27,8 @@ module RailsSettingsUi::SettingsHelper
     field = ""
     RailsSettingsUi.default_settings[setting_name.to_sym].each do |value|
       checked = all_settings[setting_name.to_s].map(&:to_s).include?(value.to_s)
-      field << check_box_tag("settings[#{setting_name.to_s}][#{value.to_s}]", nil, checked, style: "margin: 0 10px;")
-      field << label_tag("settings[#{setting_name.to_s}][#{value.to_s}]", I18n.t("settings.attributes.#{setting_name}.labels.#{value}", default: value.to_s), style: "display: inline-block;")
+      field << check_box_tag("settings[#{setting_name}][#{value}]", nil, checked, style: "margin: 0 10px;")
+      field << label_tag("settings[#{setting_name}][#{value}]", I18n.t("settings.attributes.#{setting_name}.labels.#{value}", default: value.to_s), style: "display: inline-block;")
     end
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
@@ -38,18 +38,18 @@ module RailsSettingsUi::SettingsHelper
   def checkbox_field(setting_name, setting_value)
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     fields = ""
-    fields << hidden_field_tag("settings[#{setting_name.to_s}]", 'off').html_safe
-    fields << check_box_tag("settings[#{setting_name.to_s}]", nil, setting_value).html_safe
+    fields << hidden_field_tag("settings[#{setting_name}]", 'off').html_safe
+    fields << check_box_tag("settings[#{setting_name}]", nil, setting_value).html_safe
     fields << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     fields.html_safe
   end
 
   def text_field(setting_name, setting_value, options = {})
     field = if setting_value.to_s.size > 30
-      text_area_tag("settings[#{setting_name}]", setting_value.to_s, options.merge(rows: 10))
-    else
-      text_field_tag("settings[#{setting_name}]", setting_value.to_s, options)
-    end
+              text_area_tag("settings[#{setting_name}]", setting_value.to_s, options.merge(rows: 10))
+            else
+              text_field_tag("settings[#{setting_name}]", setting_value.to_s, options)
+            end
 
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     field + (help_block_content.presence && content_tag(:span, help_block_content, class: 'help-block'))

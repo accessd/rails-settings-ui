@@ -1,6 +1,5 @@
 require File.expand_path('../lib/rails-settings-ui/version', __FILE__)
 
-
 Gem::Specification.new do |s|
   s.name = 'rails-settings-ui'
   s.author = 'Andrey Morskov'
