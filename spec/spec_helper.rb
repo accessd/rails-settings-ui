@@ -6,6 +6,9 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
 require 'pry'
+require "simplecov"
+
+SimpleCov.start
 
 load "#{Rails.root.to_s}/db/schema.rb" # set up memory db
 
