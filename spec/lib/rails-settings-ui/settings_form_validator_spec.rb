@@ -41,7 +41,7 @@ describe RailsSettingsUi::SettingsFormValidator do
 
       it 'fail' do
         expect_with_error('style' => 'wtf')
-        expect_with_error('style' => '123')
+        expect_with_error('style' => '{test: 123}')
         expect_with_error('style' => "{\"border_color\"=>, \"block_color\"=>\"ffffff\"""}")
       end
     end
