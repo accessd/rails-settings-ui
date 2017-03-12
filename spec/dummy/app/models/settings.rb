@@ -16,4 +16,5 @@ class Settings < RailsSettings::CachedSettings
   defaults[:mode] = [:auto, :manual]
   defaults[:timer] = 2.hours
   defaults[:project_status] = :finished
+  defaults[:locale] = [:en, :ru]
 end

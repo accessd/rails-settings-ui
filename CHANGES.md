@@ -1,7 +1,8 @@
 [WIP] ## v1.x.x
 
 * show flash success message after saving settings
-* specify default values for select tags
+* specify default selected value for select tags
+* default options for select tag, without specify it in locale config
 
 ## v1.2.0
 
