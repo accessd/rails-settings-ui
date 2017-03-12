@@ -83,7 +83,7 @@ You can localize:
           manual: 'Manual mode'
 ```
 
-*  Select options labels and values(it's required for selects), eg:
+*  Select options labels and values, eg:
 
 ```yaml
   settings:
@@ -92,6 +92,20 @@ You can localize:
         labels:
           auto: 'Auto buy' # 'auto' is option value, 'Auto buy' is option label
           manual: 'Manual buy'
+```
+
+so result will be:
+
+```html
+  <option value="auto">Auto buy</option>
+  <option value="manual">Manual buy</option>
+```
+
+if you don't specify labels in locale config, you'll get:
+
+```html
+  <option value="auto">auto</option>
+  <option value="manual">manual</option>
 ```
 
 *  Help blocks for settings, eg:

@@ -14,15 +14,20 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def select_tag_field(setting_name, setting_value)
-    default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |value, label|
+    default_options_from_locale = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |value, label|
       [label, value]
     end
-    default_value = if setting_value.is_a?(Array)
+    selected_value = if setting_value.is_a?(Array)
       default_value_for_setting(setting_name)
     else
       setting_value
     end
-    field = select_tag("settings[#{setting_name}]", options_for_select(default_setting_values, default_value), class: 'form-control')
+    default_options = if default_options_from_locale.empty?
+      all_settings[setting_name.to_s].map {|v| [v, v]}
+    else
+      default_options_from_locale
+    end
+    field = select_tag("settings[#{setting_name}]", options_for_select(default_options, selected_value), class: 'form-control')
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     field.html_safe

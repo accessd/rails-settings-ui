@@ -48,12 +48,18 @@ describe "Settings interface", type: :feature do
     end
   end
 
-  describe "default values for settings" do
-    it "works for select tag" do
+  describe "select tags" do
+    it "default selected value" do
       RailsSettingsUi.settings_displayed_as_select_tag = [:mode]
       RailsSettingsUi.defaults_for_settings = {mode: :manual}
       visit_settings_page
       expect(find('select#settings_mode').value).to eq('manual')
+    end
+
+    it "default labels for options" do
+      RailsSettingsUi.settings_displayed_as_select_tag = [:locale]
+      visit_settings_page
+      expect(find('select#settings_locale').find(:option, 'en').value).to eq('en')
     end
   end
 
