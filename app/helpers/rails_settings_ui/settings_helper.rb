@@ -1,11 +1,11 @@
 module RailsSettingsUi::SettingsHelper
-  def setting_field(setting_name, setting_value, all_settings)
+  def setting_field(setting_name, setting_value)
     if !RailsSettingsUi.default_settings.has_key?(setting_name.to_sym)
       message_for_default_value_missing
     elsif RailsSettingsUi.settings_displayed_as_select_tag.include?(setting_name.to_sym)
       select_tag_field(setting_name, setting_value)
     elsif setting_value.is_a?(Array)
-      checkboxes_group_field(setting_name, all_settings)
+      checkboxes_group_field(setting_name)
     elsif [TrueClass, FalseClass].include?(setting_value.class)
       checkbox_field(setting_name, setting_value)
     else
@@ -17,16 +17,22 @@ module RailsSettingsUi::SettingsHelper
     default_setting_values = I18n.t("settings.attributes.#{setting_name}.labels", default: {}).map do |value, label|
       [label, value]
     end
-    field = select_tag("settings[#{setting_name}]", options_for_select(default_setting_values, setting_value), class: 'form-control')
+    default_value = if setting_value.is_a?(Array)
+      default_value_for_setting(setting_name)
+    else
+      setting_value
+    end
+    field = select_tag("settings[#{setting_name}]", options_for_select(default_setting_values, default_value), class: 'form-control')
     help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     field.html_safe
   end
 
-  def checkboxes_group_field(setting_name, all_settings)
+  def checkboxes_group_field(setting_name)
     field = ""
+    all_setting_values = all_settings[setting_name.to_s].map(&:to_s)
     RailsSettingsUi.default_settings[setting_name.to_sym].each do |value|
-      checked = all_settings[setting_name.to_s].map(&:to_s).include?(value.to_s)
+      checked = all_setting_values.include?(value.to_s)
       field << check_box_tag("settings[#{setting_name}][#{value}]", nil, checked, style: "margin: 0 10px;")
       field << label_tag("settings[#{setting_name}][#{value}]", I18n.t("settings.attributes.#{setting_name}.labels.#{value}", default: value.to_s), style: "display: inline-block;")
     end
@@ -68,4 +74,11 @@ module RailsSettingsUi::SettingsHelper
     end
   end
 
+  def default_value_for_setting(setting_name)
+    RailsSettingsUi.defaults_for_settings.with_indifferent_access[setting_name.to_sym]
+  end
+
+  def all_settings
+    RailsSettingsUi.settings_klass.public_send(get_collection_method)
+  end
 end

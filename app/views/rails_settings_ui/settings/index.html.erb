@@ -34,7 +34,7 @@
         <td class="setting-value">
           <% setting_with_error = @casted_settings && @casted_settings[:errors].include?(name) %>
           <div class="form-group <%= errors ? 'has-error' : '' %>">
-            <%= setting_field(name, value, @settings) %>
+            <%= setting_field(name, value) %>
             <%- if errors.present? %>
               <span class="help-block"><%= errors %></span>
             <% end %>

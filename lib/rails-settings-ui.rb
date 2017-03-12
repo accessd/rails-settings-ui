@@ -21,6 +21,9 @@ module RailsSettingsUi
   mattr_accessor :settings_class
   self.settings_class = "Settings"
 
+  mattr_accessor :defaults_for_settings
+  self.defaults_for_settings = {}
+
   class << self
     def inline_main_app_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator
