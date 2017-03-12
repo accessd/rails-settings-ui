@@ -48,6 +48,8 @@ In config/initializers/rails_settings_ui.rb
     RailsSettingsUi.setup do |config|
       config.ignored_settings = [:company_name] # Settings not displayed in the interface
       config.settings_class = "MySettings" # Customize settings class name
+      config.settings_displayed_as_select_tag = [:mode] # Settings displayed as select tag instead of checkbox group field
+      config.defaults_for_settings = {mode: :manual} # Default option values for select tags
     end
 
 Routing

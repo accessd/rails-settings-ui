@@ -8,6 +8,7 @@ describe "Settings interface", type: :feature do
   after do
     RailsSettingsUi.settings_displayed_as_select_tag = []
     RailsSettingsUi.ignored_settings = []
+    RailsSettingsUi.defaults_for_settings = {}
   end
 
   describe "display settings correctly for" do
@@ -44,6 +45,15 @@ describe "Settings interface", type: :feature do
       RailsSettingsUi.ignored_settings = [:mode]
       visit_settings_page
       expect(page).not_to have_selector('select#settings_mode')
+    end
+  end
+
+  describe "default values for settings" do
+    it "works for select tag" do
+      RailsSettingsUi.settings_displayed_as_select_tag = [:mode]
+      RailsSettingsUi.defaults_for_settings = {mode: :manual}
+      visit_settings_page
+      expect(find('select#settings_mode').value).to eq('manual')
     end
   end
 

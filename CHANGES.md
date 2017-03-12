@@ -1,6 +1,7 @@
 [WIP] ## v1.x.x
 
 * show flash success message after saving settings
+* specify default values for select tags
 
 ## v1.2.0
 
