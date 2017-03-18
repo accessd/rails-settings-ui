@@ -190,7 +190,8 @@ Alternatively, to have custom rules just for rails-setting-ui you can:
 
     Rails.application.config.to_prepare do
       RailsSettingsUi::ApplicationController.module_eval do
-        before_filter :check_settings_permissions
+        before_filter :check_settings_permissions # for Rails 3
+        before_action :check_settings_permissions # starting from Rails 4
 
         private
         def check_settings_permissions
