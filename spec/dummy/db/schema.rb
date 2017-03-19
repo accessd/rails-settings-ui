@@ -12,6 +12,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20140320182332) do
+  self.verbose = false
 
   create_table "settings", force: true do |t|
     t.string   "var",                   null: false
@@ -23,5 +24,4 @@ ActiveRecord::Schema.define(version: 20140320182332) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
-
 end
