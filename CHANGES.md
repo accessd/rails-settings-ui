@@ -1,8 +1,13 @@
-[WIP] ## v1.x.x
+[WIP] ## vx.x.x
+
+* YOUR CONTRIBUTIONS HERE
+
+## v1.3.0
 
 * show flash success message after saving settings
 * specify default selected value for select tags
 * default options for select tag, without specify it in locale config
+* default layout is `application`
 
 ## v1.2.0
 
