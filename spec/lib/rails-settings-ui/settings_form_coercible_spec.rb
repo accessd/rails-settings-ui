@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe RailsSettingsUi::SettingsFormCoercible do
 
   describe "#coerce!" do

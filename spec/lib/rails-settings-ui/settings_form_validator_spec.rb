@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe RailsSettingsUi::SettingsFormValidator do
 
   describe "#errors" do

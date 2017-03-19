@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Settings interface", type: :feature do
   before do
     visit_settings_page

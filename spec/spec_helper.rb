@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
-
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require 'rspec/rails'
+require 'rails-controller-testing'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
@@ -23,8 +23,18 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
 
-  config.after(:each, :type => :request) do
+  [:controller, :view, :request].each do |type|
+    config.include ::Rails::Controller::Testing::TestProcess, type: type
+    config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
+    config.include ::Rails::Controller::Testing::Integration, type: type
+  end
+
+  config.after(:each, type: :request) do
     Capybara.reset_sessions!    # Forget the (simulated) browser state
     Capybara.use_default_driver # Revert Capybara.current_driver to Capybara.default_driver
   end
+end
+
+RailsSettingsUi::SettingsController.module_eval do
+  layout proc { ENV['LAYOUT_NAME'] || 'application' }
 end

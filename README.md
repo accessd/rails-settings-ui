@@ -166,7 +166,8 @@ defaults should looks like:
 Views
 -------------
 
-You can render all rails-settings-ui views inside your app layout (for nice looking you will need include bootstrap, eg: `@import 'bootstrap';` in your applications.css.scss):
+Default layout is `application`, but you can render all rails-settings-ui views inside your app layout
+(for nice looking you will need include bootstrap, eg: `@import 'bootstrap';` in your applications.css.scss):
 
     Rails.application.config.to_prepare do
       # Use admin layout:
