@@ -45,7 +45,7 @@ module RailsSettingsUi
     COERCIONS_MAP = {
         String => Types::Coercible::String,
         Symbol => Types::CustomCoercions::Symbol,
-        Fixnum => Types::Form::Int,
+        (1.class == Integer ? Integer : Fixnum) => Types::Form::Int,
         ActiveSupport::HashWithIndifferentAccess => Types::CustomCoercions::Hash,
         ActiveSupport::Duration => Types::Form::Int,
         Float => Types::Form::Float,
