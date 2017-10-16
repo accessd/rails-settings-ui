@@ -24,6 +24,9 @@ module RailsSettingsUi
   mattr_accessor :defaults_for_settings
   self.defaults_for_settings = {}
 
+  mattr_accessor :name_engine
+  self.name_engine = "main_app"
+
   class << self
     def inline_main_app_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator

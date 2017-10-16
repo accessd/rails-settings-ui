@@ -2,7 +2,7 @@ module RailsSettingsUi::MainAppRouteDelegator
   # delegate url helpers to main_app
   def method_missing(method, *args, &block)
     if main_app_route_method?(method)
-      main_app.send(method, *args)
+      send(RailsSettingsUi.name_engine).send(method, *args)
     else
       super
     end
@@ -14,6 +14,6 @@ module RailsSettingsUi::MainAppRouteDelegator
 
   private
   def main_app_route_method?(method)
-    method.to_s =~ /_(?:path|url)$/ && main_app.respond_to?(method)
+    method.to_s =~ /_(?:path|url)$/ && send(RailsSettingsUi.name_engine).respond_to?(method)
   end
 end
