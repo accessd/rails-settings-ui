@@ -3,14 +3,8 @@
     <%= t('settings.index.title') %>
   </li>
 </ol>
-<% if @casted_settings && @casted_settings[:errors].any? %>
-  <div class="alert alert-danger">
-    <%= t('settings.index.settings_include_errors') %>
-  </div>
-<% else %>
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 <%= form_tag [:update_all], method: :put, class: 'form' do %>
   <table class="table table-striped">
@@ -32,7 +26,6 @@
           <%= I18n.t("settings.attributes.#{name}.name") %>
         </td>
         <td class="setting-value">
-          <% setting_with_error = @casted_settings && @casted_settings[:errors].include?(name) %>
           <div class="form-group <%= errors ? 'has-error' : '' %>">
             <%= setting_field(name, value) %>
             <%- if errors.present? %>
