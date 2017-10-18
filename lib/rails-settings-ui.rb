@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'rails-settings-ui/engine'
-require 'rails-settings-ui/main_app_route_delegator'
+require 'rails-settings-ui/route_delegator'
 require 'rails-settings-ui/version'
 
 require "rails-settings-ui/settings_form_validator"
@@ -24,9 +24,14 @@ module RailsSettingsUi
   mattr_accessor :defaults_for_settings
   self.defaults_for_settings = {}
 
+  mattr_accessor :engine_name
+  self.engine_name = "main_app"
+
+  mattr_reader :custom_schema
+
   class << self
-    def inline_main_app_routes!
-      ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator
+    def inline_engine_routes!
+      ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::RouteDelegator
     end
 
     def setup
@@ -43,6 +48,10 @@ module RailsSettingsUi
       else
         RailsSettingsUi.settings_klass.defaults
       end
+    end
+
+    def custom_validations
+      @@custom_schema = yield
     end
   end
 end
