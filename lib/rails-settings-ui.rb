@@ -27,6 +27,8 @@ module RailsSettingsUi
   mattr_accessor :engine_name
   self.engine_name = "main_app"
 
+  mattr_reader :custom_schema
+
   class << self
     def inline_engine_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::RouteDelegator
@@ -46,6 +48,10 @@ module RailsSettingsUi
       else
         RailsSettingsUi.settings_klass.defaults
       end
+    end
+
+    def custom_validations
+      @@custom_schema = yield
     end
   end
 end
