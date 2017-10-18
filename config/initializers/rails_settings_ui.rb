@@ -10,5 +10,5 @@ require 'rails-settings-ui'
 
 Rails.application.config.to_prepare do
   # If you use a *custom layout*, make route helpers available to RailsSettingsUi:
-  # RailsSettingsUi.inline_main_app_routes!
+  # RailsSettingsUi.inline_engine_routes!
 end
