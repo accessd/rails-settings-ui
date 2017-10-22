@@ -50,6 +50,7 @@ In config/initializers/rails_settings_ui.rb
       config.settings_class = "MySettings" # Customize settings class name
       config.settings_displayed_as_select_tag = [:mode] # Settings displayed as select tag instead of checkbox group field
       config.defaults_for_settings = {mode: :manual} # Default option values for select tags
+      config.engine_name = "your engine name" # Default use 'main_app'
     end
 
 Routing
@@ -175,7 +176,7 @@ Default layout is `application`, but you can render all rails-settings-ui views 
         layout 'admin'
       end
       # If you are using a custom layout, you will want to make app routes available to rails-setting-ui:
-      RailsSettingsUi.inline_main_app_routes!
+      RailsSettingsUi.inline_engine_routes! # old name of method inline_main_app_routes!
     end
 
 
