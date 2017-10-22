@@ -28,6 +28,11 @@ module RailsSettingsUi
   self.engine_name = "main_app"
 
   class << self
+    def inline_main_app_routes!
+      warn("[DEPRECATION] inline_main_app_routes!is deprecated. Please useinline_engine_routes!instead.")
+      ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::RouteDelegator
+    end
+
     def inline_engine_routes!
       ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::RouteDelegator
     end
