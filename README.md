@@ -50,7 +50,7 @@ In config/initializers/rails_settings_ui.rb
       config.settings_class = "MySettings" # Customize settings class name
       config.settings_displayed_as_select_tag = [:mode] # Settings displayed as select tag instead of checkbox group field
       config.defaults_for_settings = {mode: :manual} # Default option values for select tags
-      config.engine_name = "your engine name" # Default use 'main_app'
+      config.engine_name = "your engine name" # Default use 'main_app', if you mount this engine to another engine, then set name of engine
     end
 
 Routing
