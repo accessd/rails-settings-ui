@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'rails-settings-ui/engine'
-require 'rails-settings-ui/main_app_route_delegator'
+require 'rails-settings-ui/route_delegator'
 require 'rails-settings-ui/version'
 
 require "rails-settings-ui/settings_form_validator"
@@ -24,9 +24,17 @@ module RailsSettingsUi
   mattr_accessor :defaults_for_settings
   self.defaults_for_settings = {}
 
+  mattr_accessor :engine_name
+  self.engine_name = "main_app"
+
   class << self
     def inline_main_app_routes!
-      ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::MainAppRouteDelegator
+      warn("[DEPRECATION] inline_main_app_routes! is deprecated. Please use inline_engine_routes! instead.")
+      inline_engine_routes!
+    end
+
+    def inline_engine_routes!
+      ::RailsSettingsUi::ApplicationController.helper ::RailsSettingsUi::RouteDelegator
     end
 
     def setup
