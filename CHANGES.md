@@ -2,6 +2,10 @@
 
 * YOUR CONTRIBUTIONS HERE
 
+## v1.3.2
+* added the ability to connect to another engine (config.engine_name parameter)
+* renamed method inline_main_app_routes! -> inline_engine_routes!
+
 ## v1.3.0
 
 * show flash success message after saving settings
