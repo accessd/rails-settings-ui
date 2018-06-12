@@ -2,6 +2,9 @@
 
 * YOUR CONTRIBUTIONS HERE
 
+## v1.3.3
+* fix dependency issue with dry-validation
+
 ## v1.3.2
 * added the ability to connect to another engine (config.engine_name parameter)
 * renamed method inline_main_app_routes! -> inline_engine_routes!
