@@ -47,7 +47,8 @@ module RailsSettingsUi
 
     def default_settings
       if Gem.loaded_specs['rails-settings-cached'].version.to_s >= '0.6.0'
-        RailsSettings::Default.instance.with_indifferent_access
+        settings = RailsSettings::Default.instance.with_indifferent_access
+        settings.reject { |name, _description| ignored_settings.include?(name.to_sym) }
       else
         RailsSettingsUi.settings_klass.defaults
       end
