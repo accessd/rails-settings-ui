@@ -14,7 +14,7 @@ module RailsSettingsUi
     end
   end
 
-  class SettingsSchema < Dry::Validation::Schema::Form
+  class SettingsSchema < Dry::Validation::Schema::Params
     predicates(CustomPredicates)
   end
 
