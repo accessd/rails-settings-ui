@@ -2,6 +2,9 @@
 
 * YOUR CONTRIBUTIONS HERE
 
+## v1.3.4
+* fix reference to deprecated Dry Types
+
 ## v1.3.3
 * fix dependency issue with dry-validation
 
