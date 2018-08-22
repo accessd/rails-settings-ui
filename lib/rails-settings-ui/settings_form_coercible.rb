@@ -45,13 +45,13 @@ module RailsSettingsUi
     COERCIONS_MAP = {
         String => Types::Coercible::String,
         Symbol => Types::CustomCoercions::Symbol,
-        (1.class == Integer ? Integer : Fixnum) => Types::Form::Int,
+        (1.class == Integer ? Integer : Fixnum) => Types::Params::Integer,
         ActiveSupport::HashWithIndifferentAccess => Types::CustomCoercions::Hash,
-        ActiveSupport::Duration => Types::Form::Int,
-        Float => Types::Form::Float,
+        ActiveSupport::Duration => Types::Params::Integer,
+        Float => Types::Params::Float,
         Array => Types::CustomCoercions::Array,
-        FalseClass => Types::Form::Bool,
-        TrueClass => Types::Form::Bool
+        FalseClass => Types::Params::Bool,
+        TrueClass => Types::Params::Bool
     }.freeze
 
     def initialize(default_settings, settings)
