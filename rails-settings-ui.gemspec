@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 3.0'
   s.add_dependency 'i18n'
   s.add_dependency 'dry-types'
-  s.add_dependency 'dry-validation', '>= 0.12.0'
+  s.add_dependency 'dry-validation', '< 1.0'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'rails-controller-testing'
