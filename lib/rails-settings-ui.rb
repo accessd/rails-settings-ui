@@ -3,8 +3,7 @@ require 'rails-settings-ui/engine'
 require 'rails-settings-ui/route_delegator'
 require 'rails-settings-ui/version'
 
-require "rails-settings-ui/settings_form_validator"
-require "rails-settings-ui/settings_form_coercible"
+require "rails-settings-ui/type_converter"
 
 module RailsSettingsUi
   mattr_accessor :parent_controller
@@ -45,12 +44,21 @@ module RailsSettingsUi
       settings_class.constantize
     end
 
+    def setting_config(name)
+      defined_fields = RailsSettingsUi.settings_klass.public_send(:all).defined_fields
+      defined_fields.find { |s| s[:key] == name }
+    end
+
     def default_settings
-      if Gem.loaded_specs['rails-settings-cached'].version.to_s >= '0.6.0'
-        settings = RailsSettings::Default.instance.with_indifferent_access
+      rsc_version = Gem.loaded_specs['rails-settings-cached'].version.to_s
+
+      if rsc_version >= '2.7.0'
+        defined_fields = RailsSettingsUi.settings_klass.public_send(:all).defined_fields
+        settings = defined_fields.each_with_object({}) { |s, hsh| hsh[s[:key]] = s[:default] }.with_indifferent_access
         settings.reject { |name, _description| ignored_settings.include?(name.to_sym) }
       else
-        RailsSettingsUi.settings_klass.defaults
+        settings = RailsSettings::Default.instance.with_indifferent_access
+        settings.reject { |name, _description| ignored_settings.include?(name.to_sym) }
       end
     end
   end

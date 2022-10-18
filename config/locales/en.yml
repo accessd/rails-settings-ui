@@ -1,8 +1,7 @@
 en:
   errors:
-    form_hash?: Invalid hash
-    int?: Invalid numeric
-    float?: Invalid numeric
+    invalid_hash: Invalid hash
+    invalid_numeric: Invalid numeric
   settings:
     index:
       title: Settings

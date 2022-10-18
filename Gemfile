@@ -1,8 +1,9 @@
-source "http://rubygems.org"
+source 'http://rubygems.org'
 
 gemspec
 
 group :development, :test do
-  gem "sqlite3"
-  gem "rails-settings-cached", '0.5.4'
+  gem 'pry'
+  gem 'sqlite3'
+  gem 'rails-settings-cached', '2.8.2'
 end

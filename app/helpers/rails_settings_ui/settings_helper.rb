@@ -70,20 +70,15 @@ module RailsSettingsUi::SettingsHelper
     content_tag(:span, I18n.t("settings.errors.default_missing"), class: "label label-warning")
   end
 
-  def get_collection_method
-    case Rails::VERSION::STRING
-    when /4\.0\.\d+/ || /3\..*/
-      :all
-    else
-      :get_all
-    end
-  end
-
   def default_value_for_setting(setting_name)
     RailsSettingsUi.defaults_for_settings.with_indifferent_access[setting_name.to_sym]
   end
 
   def all_settings
-    RailsSettingsUi.settings_klass.public_send(get_collection_method)
+    stored_settings = RailsSettingsUi.settings_klass.public_send(:all).each_with_object({}) do |s, hsh|
+      hsh[s.var] = s.value
+    end.with_indifferent_access
+
+    stored_settings.merge(RailsSettingsUi.default_settings.merge(stored_settings))
   end
 end
