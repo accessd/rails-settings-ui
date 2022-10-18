@@ -1,10 +1,8 @@
 Rails settings UI
 ================================
 
-[![Gem Version](https://badge.fury.io/rb/rails-settings-ui.png)](http://badge.fury.io/rb/rails-settings-ui)
-[![Build Status](https://travis-ci.org/accessd/rails-settings-ui.svg?branch=master)](https://travis-ci.org/accessd/rails-settings-ui)
-[![Code Climate](https://codeclimate.com/github/accessd/rails-settings-ui/badges/gpa.svg)](https://codeclimate.com/github/accessd/rails-settings-ui)
-[![Test Coverage](https://codeclimate.com/github/accessd/rails-settings-ui/badges/coverage.svg)](https://codeclimate.com/github/accessd/rails-settings-ui/coverage)
+[![Gem Version](https://badge.fury.io/rb/rails-settings-ui.svg)](https://rubygems.org/gems/rails-settings-ui)
+[![build](https://github.com/accessd/rails-settings-ui/workflows/build/badge.svg)](https://github.com/accessd/rails-settings-cached/actions?query=workflow%3Abuild)
 
 A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 7.
 It depends on [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
