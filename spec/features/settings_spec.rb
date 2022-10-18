@@ -106,7 +106,7 @@ describe "Settings interface", type: :feature do
       fill_in("settings[style]", with: form_value)
       click_on_save
       expect(find("#settings_style").value).to eq("{\"border_color\"=>\"e0e0e0\", \"block_color\"=>\"000000\"}")
-      expect(Settings[:style]).to eq(h)
+      expect(Settings.style).to eq(h)
     end
 
     describe 'array' do
@@ -116,20 +116,21 @@ describe "Settings interface", type: :feature do
         click_on_save
         expect(find('#settings_mode_auto')).not_to be_checked
         expect(find('#settings_mode_manual')).to be_checked
-        expect(Settings[:mode]).to eq([:manual])
+        expect(Settings.mode).to eq([:manual])
 
         uncheck 'settings_mode_manual'
+
         click_on_save
         expect(find('#settings_mode_auto')).not_to be_checked
         expect(find('#settings_mode_manual')).not_to be_checked
-        expect(Settings[:mode]).to eq([])
+        expect(Settings.mode).to eq([])
 
         check 'settings_mode_manual'
         check 'settings_mode_auto'
         click_on_save
         expect(find('#settings_mode_auto')).to be_checked
         expect(find('#settings_mode_manual')).to be_checked
-        expect(Settings[:mode]).to eq([:auto, :manual])
+        expect(Settings.mode).to eq([:auto, :manual])
       end
 
       it 'as select' do
@@ -138,12 +139,12 @@ describe "Settings interface", type: :feature do
         select 'Auto', from: 'settings_mode'
         click_on_save
         expect(find('select#settings_mode').value).to eq('auto')
-        expect(Settings[:mode]).to eq(:auto)
+        expect(Settings.mode).to eq(:auto)
 
         select 'Manual', from: 'settings_mode'
         click_on_save
         expect(find('select#settings_mode').value).to eq('manual')
-        expect(Settings[:mode]).to eq(:manual)
+        expect(Settings.mode).to eq(:manual)
       end
     end
 
@@ -159,7 +160,7 @@ describe "Settings interface", type: :feature do
       fill_in("settings[#{name}]", with: form_value)
       click_on_save
       expect(find("#settings_#{name}").value).to eq(form_value)
-      expect(Settings[name]).to eq(db_value)
+      expect(Settings.public_send(name)).to eq(db_value)
     end
 
     def visit_settings_page

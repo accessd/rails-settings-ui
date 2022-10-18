@@ -2,6 +2,12 @@
 
 * YOUR CONTRIBUTIONS HERE
 
+## v2.0.0
+
+* removing dry-rb
+* add rails-settings-cached as dependency
+* add support for ruby 3.1 and new Rails
+
 ## v1.3.5
 * use dry-validation < 1.0
 

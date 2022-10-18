@@ -1,16 +1,24 @@
 class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationController
   include RailsSettingsUi::SettingsHelper
   before_action :collection
-  before_action :validate_settings, only: :update_all
+  before_action :cast_settings_params, only: :update_all
 
   def index
   end
 
   def update_all
-    if @errors.any?
+    if @casted_settings[:errors].any?
+      @errors = @casted_settings[:errors]
       render :index
     else
-      coerced_values.each { |name, value| RailsSettingsUi.settings_klass[name] = value }
+      @casted_settings.map do |name, value|
+        next if name == 'errors'
+
+        sc = RailsSettingsUi.setting_config(name)
+        next if sc[:readonly] == true
+
+        RailsSettingsUi.settings_klass.public_send("#{name}=", value)
+      end
       flash[:success] = t('settings.index.settings_saved')
       redirect_to [:settings]
     end
@@ -19,23 +27,19 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    all_settings_without_ignored = all_settings.reject{ |name, _description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
+    all_settings_without_ignored = all_settings.reject do |name, _description|
+      RailsSettingsUi.ignored_settings.include?(name.to_sym)
+    end
     @settings = Hash[all_settings_without_ignored]
     @errors = {}
   end
 
-  def validate_settings
-    # validation schema accepts hash (http://dry-rb.org/gems/dry-validation/forms/) so we're converting
-    # ActionController::Parameters => ActiveSupport::HashWithIndifferentAccess
-    @errors = RailsSettingsUi::SettingsFormValidator.new(default_settings, settings_from_params).errors
-  end
-
-  def coerced_values
-    RailsSettingsUi::SettingsFormCoercible.new(default_settings, settings_from_params).coerce!
+  def cast_settings_params
+    @casted_settings = RailsSettingsUi::TypeConverter.cast(settings_from_params)
   end
 
   def settings_from_params
-    settings_params = params['settings'].deep_dup
+    settings_params = params['settings'].deep_dup || {}
     if settings_params.respond_to?(:to_unsafe_h)
       settings_params.to_unsafe_h
     else

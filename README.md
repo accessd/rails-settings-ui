@@ -6,14 +6,12 @@ Rails settings UI
 [![Code Climate](https://codeclimate.com/github/accessd/rails-settings-ui/badges/gpa.svg)](https://codeclimate.com/github/accessd/rails-settings-ui)
 [![Test Coverage](https://codeclimate.com/github/accessd/rails-settings-ui/badges/coverage.svg)](https://codeclimate.com/github/accessd/rails-settings-ui/coverage)
 
-A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 5.
-It compatible with [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
+A Rails Engine to manage your application settings. Includes validation. Compatible with Rails 7.
+It depends on [rails-settings-cached](https://github.com/huacnlee/rails-settings-cached) gem.
 
 Preview:
 
 ![ScreenShot](https://raw.github.com/accessd/rails-settings-ui/master/doc/img/settings-page.png)
-
-Live example: http://rails-settings-ui.herokuapp.com/
 
 How to
 -----
@@ -21,16 +19,6 @@ How to
 Add to Gemfile
 
     gem 'rails-settings-ui'
-
-then add
-
-    gem 'rails-settings-cached'
-
-or
-
-    gem 'rails-settings'
-
-or your fork of rails-settings.
 
 If you want to use bootstrap interface you need also include bootstrap stylesheets to your app.
 You may use [bootstrap-sass](https://github.com/twbs/bootstrap-sass) gem for that.
@@ -115,54 +103,23 @@ if you don't specify labels in locale config, you'll get:
   settings:
     attributes:
       launch_mode:
-        help_block: 'Rocket launch mode'
+        help_block: 'launch mode'
 ```
 
 Validations
 -------------
 
-To validation work is required the default settings in the proper format, eg:
+Validations work based on default value for setting or by explicitly specify type for setting, eg:
 
-For rails-settings-cached up to 0.5.8:
+    class Settings < RailsSettings::Base
+      cache_prefix { "v1" }
 
-    class Settings < RailsSettings::CachedSettings
-      defaults[:company_name] = "Company name"
-      defaults[:head_name] = "Head name"
-      defaults[:manager_premium] = 19
-      defaults[:show_contract_fields] = true
-      defaults[:launch_mode] = [:auto, :manual]
+      field :company_name, type: :string, default: "Company name"
+      field :head_name, default: "Head name"
+      field :manager_premium, default: 19
+      field :show_contract_fields, default: true
+      field :launch_mode, default: [:auto, :manual]
     end
-
-For rails-settings-cached with version >= 0.6.0 default settings moved to YAML config file (config/app.yml), so
-defaults should looks like:
-
-```yaml
-  defaults: &defaults
-    rocket_name: "Foo"
-    limit: 123
-    launch_mode:
-      - auto
-      - manual
-    spaceports:
-      - plesetsk
-      - baikonur
-    style:
-      border_color: 'e0e0e0'
-      block_color: 'ffffff'
-      title:
-        font: "Tahoma"
-        size: "12"
-        color: '107821'
-
-  development:
-    <<: *defaults
-
-  test:
-    <<: *defaults
-
-  production:
-    <<: *defaults
-```
 
 Views
 -------------
@@ -192,10 +149,10 @@ Alternatively, to have custom rules just for rails-setting-ui you can:
 
     Rails.application.config.to_prepare do
       RailsSettingsUi::ApplicationController.module_eval do
-        before_filter :check_settings_permissions # for Rails 3
-        before_action :check_settings_permissions # starting from Rails 4
+        before_action :check_settings_permissions
 
         private
+
         def check_settings_permissions
           render status: 403 unless current_user && can_manage_settings?(current_user)
         end
