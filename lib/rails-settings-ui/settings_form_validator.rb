@@ -20,7 +20,7 @@ module RailsSettingsUi
 
   class SettingsFormValidator
     VALIDATABLE_TYPES = {
-      (1.class == Integer ? Integer : Fixnum) => :int?,
+      Integer => :int?,
       Float => :float?,
       ActiveSupport::Duration => :int?,
       ActiveSupport::HashWithIndifferentAccess => :form_hash?
