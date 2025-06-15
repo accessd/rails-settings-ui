@@ -9,6 +9,6 @@ en:
       value: Value
       save_all: Save all
       settings_include_errors: Settings include errors
-      settings_saved: Settings saved succesfully!
+      settings_saved: Settings saved successfully!
     errors:
       default_missing: Default value missing, but exists in db
