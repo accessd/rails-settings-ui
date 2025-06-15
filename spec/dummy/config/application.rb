@@ -6,6 +6,8 @@ require File.expand_path('../boot', __FILE__)
 # require "action_mailer/railtie"
 # require "sprockets/railtie"
 
+# Workaround for Rails 6 requiring Logger before ActiveSupport modules
+require 'logger'
 require 'rails/all'
 # require "rails/test_unit/railtie"
 

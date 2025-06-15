@@ -33,4 +33,9 @@ Dummy::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Allow unsafe YAML loading for tests with Rails >= 6
+  if defined?(ActiveRecord::Base) && ActiveRecord::Base.respond_to?(:use_yaml_unsafe_load=)
+    ActiveRecord::Base.use_yaml_unsafe_load = true
+  end
 end
