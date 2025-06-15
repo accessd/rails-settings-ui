@@ -11,10 +11,11 @@ module RailsSettingsUi
   class UnknownDefaultValueType < StandardError;end
 
   class TypeConverter
+    integer_klass = defined?(Fixnum) ? Fixnum : Integer
     VALUE_TYPES_MAP = {
       String => RailsSettingsUi::ValueTypes::String,
       Symbol => RailsSettingsUi::ValueTypes::Symbol,
-      Fixnum => RailsSettingsUi::ValueTypes::Fixnum,
+      integer_klass => RailsSettingsUi::ValueTypes::Fixnum,
       # ActiveSupport::HashWithIndifferentAccess => RailsSettingsUi::ValueTypes::Hash,
       ActiveSupport::Duration => RailsSettingsUi::ValueTypes::Float,
       Float => RailsSettingsUi::ValueTypes::Float,

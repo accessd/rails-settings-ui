@@ -42,10 +42,11 @@ module RailsSettingsUi
     attr_reader :settings, :default_settings
     attr_accessor :coerced_settings
 
+    integer_klass = defined?(Fixnum) ? Fixnum : Integer
     COERCIONS_MAP = {
         String => Types::Coercible::String,
         Symbol => Types::CustomCoercions::Symbol,
-        (1.class == Integer ? Integer : Fixnum) => Types::Params::Integer,
+        integer_klass => Types::Params::Integer,
         ActiveSupport::HashWithIndifferentAccess => Types::CustomCoercions::Hash,
         ActiveSupport::Duration => Types::Params::Integer,
         Float => Types::Params::Float,
