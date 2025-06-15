@@ -4,7 +4,6 @@ require 'rspec/rails'
 require 'rails-controller-testing'
 require 'capybara/rails'
 require 'capybara/rspec'
-require 'factory_girl_rails'
 require 'pry'
 require "simplecov"
 
